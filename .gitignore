@@ -1,0 +1,12 @@
+# Ignore secret API keys
+.env
+
+# Ignore Python virtual environment
+ai-env/
+
+# Ignore Python bytecode
+__pycache__/
+*.pyc
+
+# Ignore IDE/editor config files (optional)
+.vscode/
