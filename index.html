@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Talking Shaman MVP</title>
   <style>
+    /* Basic styling for the page */
     body { font-family: sans-serif; padding: 20px; }
     textarea { width: 100%; height: 100px; }
     button { margin-top: 10px; padding: 10px 20px; }
@@ -14,64 +15,103 @@
 </head>
 <body>
   <h1>Talking Shaman MVP</h1>
+
+  <!-- Text area for user input (typed or spoken) -->
   <textarea id="userInput" placeholder="Type or speak something..."></textarea><br>
+
+  <!-- Button to send input to the AI -->
   <button onclick="sendToAI()">Send</button>
+
+  <!-- Button to activate voice input -->
   <button id="micButton" onclick="startVoiceInput()">🎤 Speak</button>
+
+  <!-- Status message display (e.g. "Listening...", "Thinking...") -->
   <p id="status"></p>
+
+  <!-- Display the AI's text response -->
   <p id="responseText"></p>
+
+  <!-- Audio player to play the AI's spoken response -->
   <audio id="audioPlayer" controls></audio>
 
   <script>
+    /**
+     * Function: sendToAI
+     * ------------------
+     * Sends the text input (typed or spoken) to the Flask backend.
+     * The backend processes the input, generates a text + voice response.
+     * This function displays the text response and plays the audio reply.
+     */
     async function sendToAI() {
-      const input = document.getElementById("userInput").value;
-      document.getElementById("status").textContent = "Thinking...";
+      const input = document.getElementById("userInput").value; // Get user's input
+      document.getElementById("status").textContent = "Thinking..."; // Show status
 
+      // Send input to the Flask backend via POST request
       const response = await fetch("http://localhost:5000/ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: input })
+        body: JSON.stringify({ prompt: input }) // Send prompt as JSON
       });
 
+      // Wait for the response and parse it as JSON
       const data = await response.json();
-      document.getElementById("responseText").textContent = data.text;
-      const audio = document.getElementById("audioPlayer");
-      audio.src = "data:audio/mp3;base64," + data.audio;
-      audio.play();
 
+      // Display text reply
+      document.getElementById("responseText").textContent = data.text;
+
+      // Play audio reply
+      const audio = document.getElementById("audioPlayer");
+      audio.src = "data:audio/mp3;base64," + data.audio; // Load base64 audio
+      audio.play(); // Play it
+
+      // Clear the status
       document.getElementById("status").textContent = "";
     }
 
+    /**
+     * Function: startVoiceInput
+     * -------------------------
+     * Uses browser's speech recognition (Web Speech API).
+     * Captures user's speech, converts it to text,
+     * then automatically sends that text to the AI.
+     */
     function startVoiceInput() {
+      // Check if the browser supports speech recognition
       if (!('webkitSpeechRecognition' in window)) {
         alert("Sorry, your browser does not support voice input.");
         return;
       }
 
-      const recognition = new webkitSpeechRecognition();
-      recognition.lang = "en-US";
-      recognition.interimResults = false;
-      recognition.maxAlternatives = 1;
+      const recognition = new webkitSpeechRecognition(); // Create recognition object
+      recognition.lang = "en-US"; // Set language
+      recognition.interimResults = false; // Only final results
+      recognition.maxAlternatives = 1; // Only one best match
 
+      // Update status to show that it's listening
       document.getElementById("status").textContent = "Listening...";
 
+      // When speech is recognized
       recognition.onresult = (event) => {
-        const transcript = event.results[0][0].transcript;
-        document.getElementById("userInput").value = transcript;
+        const transcript = event.results[0][0].transcript; // Get spoken text
+        document.getElementById("userInput").value = transcript; // Show in text box
         document.getElementById("status").textContent = "Recognized. Sending...";
-        sendToAI();
+        sendToAI(); // Send the recognized speech as input to AI
       };
 
+      // Handle any errors during recognition
       recognition.onerror = (event) => {
         alert("Voice recognition error: " + event.error);
         document.getElementById("status").textContent = "";
       };
 
+      // If nothing was said before stopping
       recognition.onend = () => {
         if (document.getElementById("status").textContent === "Listening...") {
           document.getElementById("status").textContent = "Stopped. No input detected.";
         }
       };
 
+      // Start voice recognition
       recognition.start();
     }
   </script>
