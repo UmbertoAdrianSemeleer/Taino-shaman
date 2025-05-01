@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLB Viewer - Centered Model</title>
+    <style>
+        body { 
+            margin: 0; 
+            overflow: hidden; 
+            font-family: Arial, sans-serif;
+        }
+        #canvas-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px 25px;
+            border-radius: 8px;
+            text-align: center;
+            z-index: 100;
+        }
+        #progress-bar-container {
+            width: 200px;
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+        #progress-bar {
+            width: 0%;
+            height: 100%;
+            background: #4CAF50;
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        #animation-controls {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 12px 15px;
+            border-radius: 8px;
+            color: white;
+            max-width: 80%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            z-index: 10;
+        }
+        button {
+            background: #444;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+            min-width: 100px;
+        }
+        button:hover {
+            background: #555;
+        }
+        #file-input {
+            display: none;
+        }
+        .animation-btn.active {
+            background: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container">
+        <div id="loading">
+            <p>Drop a GLB file or click "Load Model"</p>
+            <div id="progress-bar-container">
+                <div id="progress-bar"></div>
+            </div>
+        </div>
+        <div id="animation-controls">
+            <p style="width:100%; text-align:center; margin:0 0 8px 0;">Animations</p>
+        </div>
+        <div id="controls">
+            <button id="reset">Reset View</button>
+            <button id="open-file">Load Model</button>
+            <input type="file" id="file-input" accept=".glb">
+        </div>
+    </div>
+
+    <!-- Three.js and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+    
+    <!-- Main app -->
+    <script>
+        // Main Three.js setup
+        let scene, camera, renderer, controls, model;
+        let mixer, animations = [];
+        let clock = new THREE.Clock();
+        let currentAnimation = null;
+
+        init();
+
+        function init() {
+            // 1. Create Scene
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x222222);
+            
+            // 2. Add Lights
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(1, 1, 1);
+            scene.add(directionalLight);
+            
+            // 3. Set Up Camera
+            camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
+            
+            // 4. Initialize Renderer
+            renderer = new THREE.WebGLRenderer({ 
+                antialias: true,
+                alpha: true
+            });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            document.getElementById('canvas-container').prepend(renderer.domElement);
+            
+            // 5. Add OrbitControls (no auto-rotate)
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.1;
+            controls.screenSpacePanning = false;
+            controls.maxPolarAngle = Math.PI;
+            //controls.minDistance = 1;
+            // controls.maxDistance = 20;
+            controls.enableRotate = false;  // ❌ Disable rotation
+            controls.enableZoom = false;    // ❌ Disable zoom
+            controls.enablePan = false;     // Optional: disable panning too
+            
+            // 6. Set up drag and drop
+            setupDragAndDrop();
+            
+            // 7. UI Event Listeners
+            document.getElementById('reset').addEventListener('click', resetView);
+            document.getElementById('open-file').addEventListener('click', () => {
+                document.getElementById('file-input').click();
+            });
+            document.getElementById('file-input').addEventListener('change', handleFileSelect);
+            
+            // 8. Animation Loop
+            animate();
+            
+            // Initial window resize
+            onWindowResize();
+        }
+
+        function loadModel(url) {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('progress-bar').style.width = '0%';
+            
+            const loader = new THREE.GLTFLoader();
+            
+            loader.load(
+                url,
+                (gltf) => {
+                    // Remove previous model if exists
+                    if (model) scene.remove(model);
+                    if (mixer) {
+                        mixer.stopAllAction();
+                        mixer = null;
+                    }
+                    
+                    model = gltf.scene;
+                    scene.add(model);
+                    
+                    // Center the model perfectly
+                    centerModel();
+                    
+                    // Set up animations
+                    if (gltf.animations && gltf.animations.length > 0) {
+                        mixer = new THREE.AnimationMixer(model);
+                        animations = gltf.animations;
+                        createAnimationControls();
+                    } else {
+                        document.getElementById('animation-controls').innerHTML = 
+                            '<p style="width:100%; text-align:center; margin:0;">No animations found</p>';
+                    }
+                    
+                    document.getElementById('loading').style.display = 'none';
+                },
+                (xhr) => {
+                    const percent = (xhr.loaded / xhr.total * 100);
+                    document.getElementById('progress-bar').style.width = `${percent}%`;
+                },
+                (error) => {
+                    console.error('Error loading model:', error);
+                    document.getElementById('loading').innerHTML = 
+                        '<p>Error loading model</p><p style="font-size:12px;">' + error.message + '</p>';
+                }
+            );
+        }
+
+        function setupDragAndDrop() {
+            const container = document.getElementById('canvas-container');
+            
+            container.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                container.style.border = '2px dashed #4CAF50';
+                document.getElementById('loading').style.display = 'block';
+                document.getElementById('loading').innerHTML = '<p>Drop GLB file to load</p>';
+            });
+            
+            container.addEventListener('dragleave', () => {
+                container.style.border = 'none';
+                document.getElementById('loading').style.display = 'none';
+            });
+            
+            container.addEventListener('drop', (e) => {
+                e.preventDefault();
+                container.style.border = 'none';
+                
+                const file = e.dataTransfer.files[0];
+                if (file && file.name.endsWith('.glb')) {
+                    loadModel(URL.createObjectURL(file));
+                } else {
+                    document.getElementById('loading').innerHTML = 
+                        '<p>Please drop a .glb file</p>';
+                    setTimeout(() => {
+                        document.getElementById('loading').style.display = 'none';
+                    }, 2000);
+                }
+            });
+        }
+
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (file && file.name.endsWith('.glb')) {
+                loadModel(URL.createObjectURL(file));
+            }
+            e.target.value = ''; // Reset input
+        }
+
+        function createAnimationControls() {
+            const container = document.getElementById('animation-controls');
+            container.innerHTML = '<p style="width:100%; text-align:center; margin:0 0 8px 0;">Animations</p>';
+            
+            animations.forEach((anim, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'animation-btn';
+                btn.textContent = anim.name || `Animation ${index + 1}`;
+                btn.onclick = () => toggleAnimation(index);
+                container.appendChild(btn);
+            });
+            
+            const stopBtn = document.createElement('button');
+            stopBtn.textContent = 'Stop All';
+            stopBtn.onclick = () => {
+                if (mixer) mixer.stopAllAction();
+                currentAnimation = null;
+                updateButtonStates();
+            };
+            container.appendChild(stopBtn);
+        }
+
+        function toggleAnimation(index) {
+            if (!mixer || !animations[index]) return;
+            
+            if (currentAnimation === index) {
+                // Stop current animation
+                mixer.stopAllAction();
+                currentAnimation = null;
+            } else {
+                // Play new animation
+                mixer.stopAllAction();
+                const action = mixer.clipAction(animations[index]);
+                action.play();
+                currentAnimation = index;
+            }
+            
+            updateButtonStates();
+        }
+
+        function updateButtonStates() {
+            const buttons = document.querySelectorAll('.animation-btn');
+            buttons.forEach((btn, index) => {
+                btn.classList.remove('active');
+                if (index === currentAnimation) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        function centerModel() {
+            if (!model) return;
+            
+            // Reset model position first
+            model.position.set(0, 0, 0);
+            model.rotation.set(0, 0, 0);
+            model.scale.set(3, 3, 3);
+            
+            const box = new THREE.Box3().setFromObject(model);
+            const center = box.getCenter(new THREE.Vector3());
+            const size = box.getSize(new THREE.Vector3());
+            
+            // Center the model
+            model.position.sub(center);
+            
+            // Adjust camera to fit the model
+            const maxDim = Math.max(size.x, size.y, size.z);
+            const fov = camera.fov * (Math.PI / 180);
+            let cameraZ = Math.abs(maxDim / Math.sin(fov / 2));
+            
+            // Add some padding
+            cameraZ *= 1.2;
+            camera.position.z = cameraZ;
+            
+            // Reset controls
+            controls.target.set(0, 0, 0);
+            controls.update();
+        }
+
+        function resetView() {
+            centerModel();
+            controls.reset();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            const delta = clock.getDelta();
+            if (mixer) mixer.update(delta);
+            
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            
+            if (model) centerModel();
+        }
+
+        window.addEventListener('resize', onWindowResize);
+    </script>
+</body>
+</html>
