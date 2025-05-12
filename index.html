@@ -197,153 +197,171 @@
 
   <script>
     let scene, camera, renderer, controls, model, mixer;
-    let modelBoundingBox = new THREE.Box3();
-    let idealCameraDistance = 5;
-    let animations = {};
+let modelBoundingBox = new THREE.Box3();
+let idealCameraDistance = 5;
+let animations = {};
 
-    initViewer();
+initViewer();
 
-    function initViewer() {
-      scene = new THREE.Scene();
-      scene.background = new THREE.Color(0x222222);
+function initViewer() {
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x222222);
 
-      camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 1000);
-      camera.position.z = idealCameraDistance;
+  camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = idealCameraDistance;
 
-      renderer = new THREE.WebGLRenderer({ antialias: true });
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      document.getElementById("canvas-container").prepend(renderer.domElement);
+  renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.getElementById("canvas-container").prepend(renderer.domElement);
 
-      controls = new THREE.OrbitControls(camera, renderer.domElement);
-      controls.enableDamping = true;
-      controls.dampingFactor = 0.1;
-      controls.screenSpacePanning = true;
-      controls.maxPolarAngle = Math.PI;
+  controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.1;
+  controls.screenSpacePanning = true;
+  controls.maxPolarAngle = Math.PI;
 
-      const light = new THREE.DirectionalLight(0xffffff, 1);
-      light.position.set(1, 1, 1);
-      scene.add(light);
+  const light = new THREE.DirectionalLight(0xffffff, 1);
+  light.position.set(1, 1, 1);
+  scene.add(light);
 
-      const loader = new THREE.GLTFLoader();
-      loader.load("model.glb", function(gltf) {
-        model = gltf.scene;
-        scene.add(model);
+  const loader = new THREE.GLTFLoader();
+  loader.load("model.glb", function (gltf) {
+    model = gltf.scene;
+    scene.add(model);
 
-        modelBoundingBox.setFromObject(model);
-        const center = modelBoundingBox.getCenter(new THREE.Vector3());
-        const size = modelBoundingBox.getSize(new THREE.Vector3()).length();
+    modelBoundingBox.setFromObject(model);
+    const center = modelBoundingBox.getCenter(new THREE.Vector3());
+    const size = modelBoundingBox.getSize(new THREE.Vector3()).length();
 
-        model.position.sub(center);
-        idealCameraDistance = size * 1.5;
-        camera.position.z = idealCameraDistance;
-        camera.lookAt(new THREE.Vector3());
-        controls.target.set(0, 0, 0);
-        controls.update();
+    model.position.sub(center);
+    idealCameraDistance = size * 1.5;
+    camera.position.z = idealCameraDistance;
+    camera.lookAt(new THREE.Vector3());
+    controls.target.set(0, 0, 0);
+    controls.update();
 
-        mixer = new THREE.AnimationMixer(model);
-        gltf.animations.forEach(clip => {
-          const action = mixer.clipAction(clip);
-          animations[clip.name] = action;
-          const button = document.createElement('button');
-          button.textContent = clip.name;
-          button.onclick = () => {
-            Object.values(animations).forEach(a => a.stop());
-            action.reset().play();
-          };
-          document.getElementById("animation-list").appendChild(button);
+    mixer = new THREE.AnimationMixer(model);
+    gltf.animations.forEach(clip => {
+      const action = mixer.clipAction(clip);
+      animations[clip.name] = action;
+      const button = document.createElement('button');
+      button.textContent = clip.name;
+      button.onclick = () => {
+        Object.values(animations).forEach(a => a.stop());
+        action.reset().play();
+      };
+      document.getElementById("animation-list").appendChild(button);
+    });
+  });
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  animate();
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  if (mixer) mixer.update(0.016);
+  controls.update();
+  renderer.render(scene, camera);
+}
+
+function toggleAnimationMenu() {
+  const list = document.getElementById("animation-list");
+  list.style.display = list.style.display === 'block' ? 'none' : 'block';
+}
+
+function toggleChat(show) {
+  document.getElementById("chat-container").style.display = show ? 'flex' : 'none';
+  document.getElementById("chat-toggle-btn").style.display = show ? 'none' : 'flex';
+}
+
+const chatInput = document.getElementById("chat-input");
+const sendBtn = document.getElementById("send-btn");
+const voiceBtn = document.getElementById("voice-btn");
+const statusText = document.getElementById("status");
+const responseText = document.getElementById("responseText");
+const audioPlayer = document.getElementById("audioPlayer");
+
+sendBtn.addEventListener("click", sendToAI);
+voiceBtn.addEventListener("click", startVoiceInput);
+
+async function sendToAI() {
+  const input = chatInput.value;
+  statusText.textContent = "Thinking...";
+
+  const response = await fetch("http://localhost:5000/ask", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ prompt: input })
+  });
+
+  const data = await response.json();
+  responseText.textContent = data.text;
+  audioPlayer.src = "data:audio/mp3;base64," + data.audio;
+  audioPlayer.play();
+  statusText.textContent = "";
+}
+
+function startVoiceInput() {
+  if (!navigator.mediaDevices || !window.MediaRecorder) {
+    alert("Your browser does not support voice recording.");
+    return;
+  }
+
+  statusText.textContent = "Listening...";
+
+  navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+    const mediaRecorder = new MediaRecorder(stream);
+    const audioChunks = [];
+
+    mediaRecorder.ondataavailable = event => {
+      audioChunks.push(event.data);
+    };
+
+    mediaRecorder.onstop = async () => {
+      statusText.textContent = "Transcribing...";
+
+      const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
+      const formData = new FormData();
+      formData.append("audio", audioBlob, "recording.webm");
+
+      try {
+        const response = await fetch("http://localhost:5000/transcribe", {
+          method: "POST",
+          body: formData
         });
-      });
 
-      window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-      });
-
-      animate();
-    }
-
-    function animate() {
-      requestAnimationFrame(animate);
-      if (mixer) mixer.update(0.016);
-      controls.update();
-      renderer.render(scene, camera);
-    }
-
-    function toggleAnimationMenu() {
-      const list = document.getElementById("animation-list");
-      list.style.display = list.style.display === 'block' ? 'none' : 'block';
-    }
-
-    function toggleChat(show) {
-      document.getElementById("chat-container").style.display = show ? 'flex' : 'none';
-      document.getElementById("chat-toggle-btn").style.display = show ? 'none' : 'flex';
-    }
-
-    const chatInput = document.getElementById("chat-input");
-    const sendBtn = document.getElementById("send-btn");
-    const voiceBtn = document.getElementById("voice-btn");
-    const statusText = document.getElementById("status");
-    const responseText = document.getElementById("responseText");
-    const audioPlayer = document.getElementById("audioPlayer");
-
-    sendBtn.addEventListener("click", sendToAI);
-    voiceBtn.addEventListener("click", startVoiceInput);
-
-    async function sendToAI() {
-      const input = chatInput.value;
-      statusText.textContent = "Thinking...";
-
-      const response = await fetch("http://localhost:5000/ask", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: input })
-      });
-
-      const data = await response.json();
-      responseText.textContent = data.text;
-      audioPlayer.src = "data:audio/mp3;base64," + data.audio;
-      audioPlayer.play();
-      statusText.textContent = "";
-    }
-
-    function startVoiceInput() {
-      if (!('webkitSpeechRecognition' in window)) {
-        alert("Sorry, your browser does not support voice input.");
-        return;
-      }
-
-      const recognition = new webkitSpeechRecognition();
-      recognition.lang = "en-US";
-      recognition.interimResults = false;
-      recognition.maxAlternatives = 1;
-
-      statusText.textContent = "Listening...";
-
-      recognition.onresult = (event) => {
-        const transcript = event.results[0][0].transcript;
-        chatInput.value = transcript;
-        statusText.textContent = "Recognized. Sending...";
-        sendToAI();
-      };
-
-      recognition.onerror = (event) => {
-        alert("Voice recognition error: " + event.error);
-        statusText.textContent = "";
-      };
-
-      recognition.onend = () => {
-        if (statusText.textContent === "Listening...") {
-          statusText.textContent = "Stopped. No input detected.";
+        const data = await response.json();
+        if (data.text) {
+          chatInput.value = data.text;
+          statusText.textContent = "Sending...";
+          sendToAI();
+        } else {
+          statusText.textContent = "Transcription failed.";
         }
-      };
+      } catch (err) {
+        console.error("Transcription error:", err);
+        statusText.textContent = "Error during transcription.";
+      }
+    };
 
-      recognition.start();
-    }
+    mediaRecorder.start();
+    setTimeout(() => {
+      mediaRecorder.stop();
+    }, 5000);  // Automatically stop recording after 5 seconds
+  }).catch(err => {
+    console.error("Microphone error:", err);
+    statusText.textContent = "Mic access denied or unavailable.";
+  });
+}
 
-    // Listen for keypress event this is implemtetns later with large button but the option is there  ardoino
-document.addEventListener("keydown", function(event) {
-  // Check if the "P" key is pressed and chat is open
+// Keyboard shortcut: P to trigger voice
+document.addEventListener("keydown", function (event) {
   if (event.key === "p" || event.key === "P") {
     startVoiceInput();
   }
