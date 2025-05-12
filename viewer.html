@@ -1,374 +1,354 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GLB Viewer - Centered Model</title>
-    <style>
-        body { 
-            margin: 0; 
-            overflow: hidden; 
-            font-family: Arial, sans-serif;
-        }
-        #canvas-container {
-            width: 100vw;
-            height: 100vh;
-            position: relative;
-        }
-        #loading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 15px 25px;
-            border-radius: 8px;
-            text-align: center;
-            z-index: 100;
-        }
-        #progress-bar-container {
-            width: 200px;
-            height: 4px;
-            background: rgba(255,255,255,0.2);
-            margin: 10px auto 0;
-            border-radius: 2px;
-        }
-        #progress-bar {
-            width: 0%;
-            height: 100%;
-            background: #4CAF50;
-            border-radius: 2px;
-            transition: width 0.3s;
-        }
-        #controls {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 8px;
-            display: flex;
-            gap: 10px;
-            z-index: 10;
-        }
-        #animation-controls {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.7);
-            padding: 12px 15px;
-            border-radius: 8px;
-            color: white;
-            max-width: 80%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            z-index: 10;
-        }
-        button {
-            background: #444;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 14px;
-            min-width: 100px;
-        }
-        button:hover {
-            background: #555;
-        }
-        #file-input {
-            display: none;
-        }
-        .animation-btn.active {
-            background: #4CAF50;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Talking Shaman with 3D Viewer</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      touch-action: none;
+    }
+    #canvas-container {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      outline: none;
+    }
+    #chat-toggle-btn {
+      position: fixed;
+      bottom: 90px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 11;
+      width: 60px;
+      height: 60px;
+      background: rgba(76, 175, 80, 0.9);
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
+    #chat-container {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 500px;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      backdrop-filter: blur(5px);
+      z-index: 10;
+      display: none;
+      flex-direction: column;
+    }
+    #chat-close {
+      align-self: flex-end;
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+    #chat-input-container {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    #chat-input {
+      flex-grow: 1;
+      padding: 10px 15px;
+      border-radius: 20px;
+      border: none;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      outline: none;
+      font-size: 1em;
+    }
+    #chat-input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    #voice-btn, #send-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(76, 175, 80, 0.8);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 1em;
+    }
+    #voice-btn:hover, #send-btn:hover {
+      background: rgba(76, 175, 80, 1);
+      transform: scale(1.05);
+    }
+    #responseText {
+      color: white;
+      margin-top: 10px;
+      font-size: 1em;
+    }
+    #status {
+      font-style: italic;
+      color: gray;
+      margin-top: 8px;
+      font-size: 0.9em;
+    }
+    audio {
+      margin-top: 10px;
+      width: 100%;
+    }
+    #animation-menu {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 10px;
+      border-radius: 8px;
+      backdrop-filter: blur(5px);
+      z-index: 20;
+    }
+    #animation-list {
+      display: none;
+      margin-top: 8px;
+    }
+    #animation-list button {
+      display: block;
+      margin: 5px 0;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    @media screen and (max-width: 600px) {
+      #chat-container {
+        width: 95%;
+        padding: 10px;
+      }
+      #chat-input {
+        font-size: 0.9em;
+      }
+      #responseText, #status {
+        font-size: 0.9em;
+      }
+      #chat-toggle-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 10px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div id="canvas-container">
-        <div id="loading">
-            <p>Drop a GLB file or click "Load Model"</p>
-            <div id="progress-bar-container">
-                <div id="progress-bar"></div>
-            </div>
-        </div>
-        <div id="animation-controls">
-            <p style="width:100%; text-align:center; margin:0 0 8px 0;">Animations</p>
-        </div>
-        <div id="controls">
-            <button id="reset">Reset View</button>
-            <button id="open-file">Load Model</button>
-            <input type="file" id="file-input" accept=".glb">
-        </div>
+    
+  <div id="canvas-container">
+    <!-- Animation Menu -->
+    <div id="animation-menu">
+      <button onclick="toggleAnimationMenu()">Animations ▾</button>
+      <div id="animation-list"></div>
     </div>
 
-    <!-- Three.js and dependencies -->
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
-    
-    <!-- Main app -->
-    <script>
-        // Main Three.js setup
-        let scene, camera, renderer, controls, model;
-        let mixer, animations = [];
-        let clock = new THREE.Clock();
-        let currentAnimation = null;
+    <!-- Chat Toggle Button -->
+    <button id="chat-toggle-btn" onclick="toggleChat(true)">talk to Me</button>
 
-        init();
+    <!-- Chat UI -->
+    <div id="chat-container">
+      <button id="chat-close" onclick="toggleChat(false)">&times;</button>
+      <textarea id="chat-input" placeholder="Type or speak something..."></textarea>
+      <div id="chat-input-container">
+        <button id="voice-btn" title="Voice Input">🎤</button>
+        <button id="send-btn" title="Send">➤</button>
+      </div>
+      <p id="status"></p>
+      <p id="responseText"></p>
+      <audio id="audioPlayer" controls></audio>
+    </div>
+  </div>
 
-        function init() {
-            // 1. Create Scene
-            scene = new THREE.Scene();
-            scene.background = new THREE.Color(0x222222);
-            
-            // 2. Add Lights
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-            scene.add(ambientLight);
-            
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-            directionalLight.position.set(1, 1, 1);
-            scene.add(directionalLight);
-            
-            // 3. Set Up Camera
-            camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.z = 5;
-            
-            // 4. Initialize Renderer
-            renderer = new THREE.WebGLRenderer({ 
-                antialias: true,
-                alpha: true
-            });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
-            document.getElementById('canvas-container').prepend(renderer.domElement);
-            
-            // 5. Add OrbitControls (no auto-rotate)
-            controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.enableDamping = true;
-            controls.dampingFactor = 0.1;
-            controls.screenSpacePanning = false;
-            controls.maxPolarAngle = Math.PI;
-            //controls.minDistance = 1;
-            // controls.maxDistance = 20;
-            controls.enableRotate = false;  // ❌ Disable rotation
-            controls.enableZoom = false;    // ❌ Disable zoom
-            controls.enablePan = false;     // Optional: disable panning too
-            
-            // 6. Set up drag and drop
-            setupDragAndDrop();
-            
-            // 7. UI Event Listeners
-            document.getElementById('reset').addEventListener('click', resetView);
-            document.getElementById('open-file').addEventListener('click', () => {
-                document.getElementById('file-input').click();
-            });
-            document.getElementById('file-input').addEventListener('change', handleFileSelect);
-            
-            // 8. Animation Loop
-            animate();
-            
-            // Initial window resize
-            onWindowResize();
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+
+  <script>
+    let scene, camera, renderer, controls, model, mixer;
+    let modelBoundingBox = new THREE.Box3();
+    let idealCameraDistance = 5;
+    let animations = {};
+
+    initViewer();
+
+    function initViewer() {
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x222222);
+
+      camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 1000);
+      camera.position.z = idealCameraDistance;
+
+      renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.getElementById("canvas-container").prepend(renderer.domElement);
+
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.1;
+      controls.screenSpacePanning = true;
+      controls.maxPolarAngle = Math.PI;
+
+      const light = new THREE.DirectionalLight(0xffffff, 1);
+      light.position.set(1, 1, 1);
+      scene.add(light);
+
+      const loader = new THREE.GLTFLoader();
+      loader.load("model.glb", function(gltf) {
+        model = gltf.scene;
+        scene.add(model);
+
+        modelBoundingBox.setFromObject(model);
+        const center = modelBoundingBox.getCenter(new THREE.Vector3());
+        const size = modelBoundingBox.getSize(new THREE.Vector3()).length();
+
+        model.position.sub(center);
+        idealCameraDistance = size * 1.5;
+        camera.position.z = idealCameraDistance;
+        camera.lookAt(new THREE.Vector3());
+        controls.target.set(0, 0, 0);
+        controls.update();
+
+        mixer = new THREE.AnimationMixer(model);
+        gltf.animations.forEach(clip => {
+          const action = mixer.clipAction(clip);
+          animations[clip.name] = action;
+          const button = document.createElement('button');
+          button.textContent = clip.name;
+          button.onclick = () => {
+            Object.values(animations).forEach(a => a.stop());
+            action.reset().play();
+          };
+          document.getElementById("animation-list").appendChild(button);
+        });
+      });
+
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      animate();
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      if (mixer) mixer.update(0.016);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+
+    function toggleAnimationMenu() {
+      const list = document.getElementById("animation-list");
+      list.style.display = list.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function toggleChat(show) {
+      document.getElementById("chat-container").style.display = show ? 'flex' : 'none';
+      document.getElementById("chat-toggle-btn").style.display = show ? 'none' : 'flex';
+    }
+
+    const chatInput = document.getElementById("chat-input");
+    const sendBtn = document.getElementById("send-btn");
+    const voiceBtn = document.getElementById("voice-btn");
+    const statusText = document.getElementById("status");
+    const responseText = document.getElementById("responseText");
+    const audioPlayer = document.getElementById("audioPlayer");
+
+    sendBtn.addEventListener("click", sendToAI);
+    voiceBtn.addEventListener("click", startVoiceInput);
+
+    async function sendToAI() {
+      const input = chatInput.value;
+      statusText.textContent = "Thinking...";
+
+      const response = await fetch("http://localhost:5000/ask", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt: input })
+      });
+
+      const data = await response.json();
+      responseText.textContent = data.text;
+      audioPlayer.src = "data:audio/mp3;base64," + data.audio;
+      audioPlayer.play();
+      statusText.textContent = "";
+    }
+
+    function startVoiceInput() {
+      if (!('webkitSpeechRecognition' in window)) {
+        alert("Sorry, your browser does not support voice input.");
+        return;
+      }
+
+      const recognition = new webkitSpeechRecognition();
+      recognition.lang = "en-US";
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      statusText.textContent = "Listening...";
+
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        chatInput.value = transcript;
+        statusText.textContent = "Recognized. Sending...";
+        sendToAI();
+      };
+
+      recognition.onerror = (event) => {
+        alert("Voice recognition error: " + event.error);
+        statusText.textContent = "";
+      };
+
+      recognition.onend = () => {
+        if (statusText.textContent === "Listening...") {
+          statusText.textContent = "Stopped. No input detected.";
         }
+      };
 
-        function loadModel(url) {
-            document.getElementById('loading').style.display = 'block';
-            document.getElementById('progress-bar').style.width = '0%';
-            
-            const loader = new THREE.GLTFLoader();
-            
-            loader.load(
-                url,
-                (gltf) => {
-                    // Remove previous model if exists
-                    if (model) scene.remove(model);
-                    if (mixer) {
-                        mixer.stopAllAction();
-                        mixer = null;
-                    }
-                    
-                    model = gltf.scene;
-                    scene.add(model);
-                    
-                    // Center the model perfectly
-                    centerModel();
-                    
-                    // Set up animations
-                    if (gltf.animations && gltf.animations.length > 0) {
-                        mixer = new THREE.AnimationMixer(model);
-                        animations = gltf.animations;
-                        createAnimationControls();
-                    } else {
-                        document.getElementById('animation-controls').innerHTML = 
-                            '<p style="width:100%; text-align:center; margin:0;">No animations found</p>';
-                    }
-                    
-                    document.getElementById('loading').style.display = 'none';
-                },
-                (xhr) => {
-                    const percent = (xhr.loaded / xhr.total * 100);
-                    document.getElementById('progress-bar').style.width = `${percent}%`;
-                },
-                (error) => {
-                    console.error('Error loading model:', error);
-                    document.getElementById('loading').innerHTML = 
-                        '<p>Error loading model</p><p style="font-size:12px;">' + error.message + '</p>';
-                }
-            );
-        }
+      recognition.start();
+    }
 
-        function setupDragAndDrop() {
-            const container = document.getElementById('canvas-container');
-            
-            container.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                container.style.border = '2px dashed #4CAF50';
-                document.getElementById('loading').style.display = 'block';
-                document.getElementById('loading').innerHTML = '<p>Drop GLB file to load</p>';
-            });
-            
-            container.addEventListener('dragleave', () => {
-                container.style.border = 'none';
-                document.getElementById('loading').style.display = 'none';
-            });
-            
-            container.addEventListener('drop', (e) => {
-                e.preventDefault();
-                container.style.border = 'none';
-                
-                const file = e.dataTransfer.files[0];
-                if (file && file.name.endsWith('.glb')) {
-                    loadModel(URL.createObjectURL(file));
-                } else {
-                    document.getElementById('loading').innerHTML = 
-                        '<p>Please drop a .glb file</p>';
-                    setTimeout(() => {
-                        document.getElementById('loading').style.display = 'none';
-                    }, 2000);
-                }
-            });
-        }
+    // Listen for keypress event this is implemtetns later with large button but the option is there  ardoino
+document.addEventListener("keydown", function(event) {
+  // Check if the "P" key is pressed and chat is open
+  if (event.key === "p" || event.key === "P") {
+    startVoiceInput();
+  }
+});
 
-        function handleFileSelect(e) {
-            const file = e.target.files[0];
-            if (file && file.name.endsWith('.glb')) {
-                loadModel(URL.createObjectURL(file));
-            }
-            e.target.value = ''; // Reset input
-        }
-
-        function createAnimationControls() {
-            const container = document.getElementById('animation-controls');
-            container.innerHTML = '<p style="width:100%; text-align:center; margin:0 0 8px 0;">Animations</p>';
-            
-            animations.forEach((anim, index) => {
-                const btn = document.createElement('button');
-                btn.className = 'animation-btn';
-                btn.textContent = anim.name || `Animation ${index + 1}`;
-                btn.onclick = () => toggleAnimation(index);
-                container.appendChild(btn);
-            });
-            
-            const stopBtn = document.createElement('button');
-            stopBtn.textContent = 'Stop All';
-            stopBtn.onclick = () => {
-                if (mixer) mixer.stopAllAction();
-                currentAnimation = null;
-                updateButtonStates();
-            };
-            container.appendChild(stopBtn);
-        }
-
-        function toggleAnimation(index) {
-            if (!mixer || !animations[index]) return;
-            
-            if (currentAnimation === index) {
-                // Stop current animation
-                mixer.stopAllAction();
-                currentAnimation = null;
-            } else {
-                // Play new animation
-                mixer.stopAllAction();
-                const action = mixer.clipAction(animations[index]);
-                action.play();
-                currentAnimation = index;
-            }
-            
-            updateButtonStates();
-        }
-
-        function updateButtonStates() {
-            const buttons = document.querySelectorAll('.animation-btn');
-            buttons.forEach((btn, index) => {
-                btn.classList.remove('active');
-                if (index === currentAnimation) {
-                    btn.classList.add('active');
-                }
-            });
-        }
-
-        function centerModel() {
-            if (!model) return;
-            
-            // Reset model position first
-            model.position.set(0, 0, 0);
-            model.rotation.set(0, 0, 0);
-            model.scale.set(3, 3, 3);
-            
-            const box = new THREE.Box3().setFromObject(model);
-            const center = box.getCenter(new THREE.Vector3());
-            const size = box.getSize(new THREE.Vector3());
-            
-            // Center the model
-            model.position.sub(center);
-            
-            // Adjust camera to fit the model
-            const maxDim = Math.max(size.x, size.y, size.z);
-            const fov = camera.fov * (Math.PI / 180);
-            let cameraZ = Math.abs(maxDim / Math.sin(fov / 2));
-            
-            // Add some padding
-            cameraZ *= 1.2;
-            camera.position.z = cameraZ;
-            
-            // Reset controls
-            controls.target.set(0, 0, 0);
-            controls.update();
-        }
-
-        function resetView() {
-            centerModel();
-            controls.reset();
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-            
-            const delta = clock.getDelta();
-            if (mixer) mixer.update(delta);
-            
-            controls.update();
-            renderer.render(scene, camera);
-        }
-
-        function onWindowResize() {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            
-            if (model) centerModel();
-        }
-
-        window.addEventListener('resize', onWindowResize);
-    </script>
+  </script>
 </body>
 </html>
