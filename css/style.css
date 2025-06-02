@@ -1,0 +1,138 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom right, #f2f2f2, #d9d9d9);
+  color: #333;
+}
+
+header, footer {
+  padding: 1rem;
+  text-align: center;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+header .subtitle {
+  font-size: 1.1rem;
+  color: #555;
+  margin-top: 0.5rem;
+  max-width: 700px;
+  margin: 0.5rem auto 0;
+}
+
+#homeBtn {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#voiceChatPage {
+  flex: 1;
+}
+
+.voice-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 1rem;
+}
+
+#statusText {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+#orb {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, #007bff, #004080);
+  box-shadow: 0 0 20px rgba(0,123,255,0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.orb.recording {
+  background: radial-gradient(circle at center, #e60000, #800000);
+  box-shadow: 0 0 30px 10px rgba(255, 0, 0, 0.6);
+  animation: pulseRecording 1s infinite ease-in-out;
+}
+
+.orb.processing {
+  background: radial-gradient(circle at center, #ffaa00, #aa5500);
+  box-shadow: 0 0 20px rgba(255,170,0,0.6);
+  animation: swirl 2s linear infinite;
+}
+
+.orb.speaking {
+  background: radial-gradient(circle at center, #00ffd5, #008f75);
+  box-shadow: 0 0 40px 20px rgba(0, 255, 213, 0.6), 0 0 60px 30px rgba(0, 255, 213, 0.3);
+  animation: ripple 1.2s infinite ease-in-out;
+}
+
+.orb.speaking::after {
+  content: '';
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: rgba(0, 255, 213, 0.2);
+  animation: pulseRing 1.2s infinite;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+@keyframes pulseRecording {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes swirl {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+@keyframes ripple {
+  0% { box-shadow: 0 0 10px 2px rgba(0,204,153,0.4); }
+  50% { box-shadow: 0 0 20px 10px rgba(0,204,153,0.3); }
+  100% { box-shadow: 0 0 10px 2px rgba(0,204,153,0.4); }
+}
+
+@keyframes pulseRing {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+  100% { transform: translate(-50%, -50%) scale(1.8); opacity: 0; }
+}
+
+#debugOutput {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+  max-width: 700px;
+  text-align: center;
+}
