@@ -1,387 +1,311 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Talking Shaman with 3D Viewer</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Whispers of Atabey</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-      touch-action: none;
-    }
-    #canvas-container {
-      width: 100vw;
-      height: 100vh;
-      position: relative;
-    }
-    canvas {
-      display: block;
-      width: 100%;
+    html, body {
       height: 100%;
-      outline: none;
-    }
-    #chat-toggle-btn {
-      position: fixed;
-      bottom: 90px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 11;
-      width: 60px;
-      height: 60px;
-      background: rgba(76, 175, 80, 0.9);
-      color: white;
-      font-size: 12px;
-      font-weight: bold;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
+      margin: 0;
+      padding: 0;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-    }
-    #chat-container {
-      position: fixed;
-      bottom: 80px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90%;
-      max-width: 500px;
-      background: rgba(0, 0, 0, 0.7);
-      border-radius: 12px;
-      padding: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      backdrop-filter: blur(5px);
-      z-index: 10;
-      display: none;
       flex-direction: column;
     }
-    #chat-close {
-      align-self: flex-end;
-      background: transparent;
+
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #f2f2f2, #d9d9d9);
+      color: #333;
+    }
+
+    header, footer {
+      padding: 1rem;
+      text-align: center;
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    header .subtitle {
+      font-size: 1.1rem;
+      color: #555;
+      margin-top: 0.5rem;
+      max-width: 700px;
+      margin: 0.5rem auto 0;
+    }
+
+    #homeBtn {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      padding: 0.4rem 0.8rem;
+      font-size: 0.9rem;
+      background-color: #007bff;
+      color: white;
       border: none;
-      color: white;
-      font-size: 20px;
-      cursor: pointer;
-      margin-bottom: 10px;
-    }
-    #chat-input-container {
-      display: flex;
-      gap: 8px;
-      margin-top: 10px;
-    }
-    #chat-input {
-      flex-grow: 1;
-      padding: 10px 15px;
-      border-radius: 20px;
-      border: none;
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      outline: none;
-      font-size: 1em;
-    }
-    #chat-input::placeholder {
-      color: rgba(255, 255, 255, 0.6);
-    }
-    #voice-btn, #send-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: none;
-      background: rgba(76, 175, 80, 0.8);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-size: 1em;
-    }
-    #voice-btn:hover, #send-btn:hover {
-      background: rgba(76, 175, 80, 1);
-      transform: scale(1.05);
-    }
-    #responseText {
-      color: white;
-      margin-top: 10px;
-      font-size: 1em;
-    }
-    #status {
-      font-style: italic;
-      color: gray;
-      margin-top: 8px;
-      font-size: 0.9em;
-    }
-    audio {
-      margin-top: 10px;
-      width: 100%;
-    }
-    #animation-menu {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      background: rgba(0, 0, 0, 0.7);
-      color: white;
-      padding: 10px;
-      border-radius: 8px;
-      backdrop-filter: blur(5px);
-      z-index: 20;
-    }
-    #animation-list {
-      display: none;
-      margin-top: 8px;
-    }
-    #animation-list button {
-      display: block;
-      margin: 5px 0;
-      background: rgba(255, 255, 255, 0.1);
-      border: none;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 4px;
+      border-radius: 6px;
       cursor: pointer;
     }
 
-    @media screen and (max-width: 600px) {
-      #chat-container {
-        width: 95%;
-        padding: 10px;
-      }
-      #chat-input {
-        font-size: 0.9em;
-      }
-      #responseText, #status {
-        font-size: 0.9em;
-      }
-      #chat-toggle-btn {
-        width: 50px;
-        height: 50px;
-        font-size: 10px;
-      }
+    #voiceChatPage {
+      flex: 1;
+    }
+
+    .voice-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: 1rem;
+    }
+
+    #statusText {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #555;
+    }
+
+    #orb {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, #007bff, #004080);
+      box-shadow: 0 0 20px rgba(0,123,255,0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .orb.recording {
+      background: radial-gradient(circle at center, #e60000, #800000);
+      box-shadow: 0 0 30px 10px rgba(255, 0, 0, 0.6);
+      animation: pulseRecording 1s infinite ease-in-out;
+    }
+
+    .orb.processing {
+      background: radial-gradient(circle at center, #ffaa00, #aa5500);
+      box-shadow: 0 0 20px rgba(255,170,0,0.6);
+      animation: swirl 2s linear infinite;
+    }
+
+    .orb.speaking {
+      background: radial-gradient(circle at center, #00ffd5, #008f75);
+      box-shadow: 0 0 40px 20px rgba(0, 255, 213, 0.6), 0 0 60px 30px rgba(0, 255, 213, 0.3);
+      animation: ripple 1.2s infinite ease-in-out;
+    }
+
+    .orb.speaking::after {
+      content: '';
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: rgba(0, 255, 213, 0.2);
+      animation: pulseRing 1.2s infinite;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+    }
+
+    @keyframes pulseRecording {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    @keyframes swirl {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+
+    @keyframes ripple {
+      0% { box-shadow: 0 0 10px 2px rgba(0,204,153,0.4); }
+      50% { box-shadow: 0 0 20px 10px rgba(0,204,153,0.3); }
+      100% { box-shadow: 0 0 10px 2px rgba(0,204,153,0.4); }
+    }
+
+    @keyframes pulseRing {
+      0% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+      100% { transform: translate(-50%, -50%) scale(1.8); opacity: 0; }
+    }
+
+    #debugOutput {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #666;
+      max-width: 700px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-    
-  <div id="canvas-container">
-    <!-- Animation Menu -->
-    <div id="animation-menu">
-      <button onclick="toggleAnimationMenu()">Animations ▾</button>
-      <div id="animation-list"></div>
+  <header>
+    <h1>Whispers of Atabey – Wisdom of the Taíno Spirit</h1>
+    <p class="subtitle">A digital Shaman sharing the wisdom of Taíno ancestors with 21st-century people</p>
+    <button id="homeBtn"><span class="material-icons">home</span></button>
+  </header>
+
+  <section id="voiceChatPage">
+    <div class="voice-wrapper">
+      <p id="statusText">Hold to speak</p>
+      <div id="orb" class="orb idle" role="button" tabindex="0" aria-label="Voice input button"></div>
+      <div id="debugOutput"></div>
     </div>
+  </section>
 
-    <!-- Chat Toggle Button -->
-    <button id="chat-toggle-btn" onclick="toggleChat(true)">talk to Me</button>
-
-    <!-- Chat UI -->
-    <div id="chat-container">
-      <button id="chat-close" onclick="toggleChat(false)">&times;</button>
-      <textarea id="chat-input" placeholder="Type or speak something..."></textarea>
-      <div id="chat-input-container">
-        <button id="voice-btn" title="Voice Input">🎤</button>
-        <button id="send-btn" title="Send">➤</button>
-      </div>
-      <p id="status"></p>
-      <p id="responseText"></p>
-      <audio id="audioPlayer" controls></audio>
-    </div>
-  </div>
-
-  
-
-  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+  <footer>
+    <p>© 2025 Whispers of Atabey. All rights reserved.</p>
+  </footer>
 
   <script>
-    let scene, camera, renderer, controls, model, mixer;
-let modelBoundingBox = new THREE.Box3();
-let idealCameraDistance = 5;
-let animations = {};
+    const orb = document.getElementById('orb');
+    const statusText = document.getElementById('statusText');
+    const debugOutput = document.getElementById('debugOutput');
+    const audioPlayer = new Audio();
 
-initViewer();
+    let isRecording = false;
+    let audioContext, analyser, dataArray, animationFrameId;
+    let mediaRecorder, audioChunks = [];
 
-function initViewer() {
-  scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x222222);
+    async function setupMicStream() {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      setupMicVisualizer(stream);
+      mediaRecorder = new MediaRecorder(stream);
+      audioChunks = [];
 
-  camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.z = idealCameraDistance;
+      mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+      mediaRecorder.onstop = handleRecordingStop;
+      mediaRecorder.start();
+    }
 
-  renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  document.getElementById("canvas-container").prepend(renderer.domElement);
+    function setupMicVisualizer(stream) {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const source = audioContext.createMediaStreamSource(stream);
+      analyser = audioContext.createAnalyser();
+      analyser.fftSize = 512;
+      dataArray = new Uint8Array(analyser.frequencyBinCount);
+      source.connect(analyser);
+      animateOrb();
+    }
 
-  controls = new THREE.OrbitControls(camera, renderer.domElement);
-  controls.enableDamping = true;
-  controls.dampingFactor = 0.1;
-  controls.screenSpacePanning = true;
-  controls.maxPolarAngle = Math.PI;
+    function animateOrb() {
+      analyser.getByteFrequencyData(dataArray);
+      const avg = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
+      const scale = 1 + avg / 256;
+      orb.style.transform = `scale(${scale.toFixed(2)})`;
+      animationFrameId = requestAnimationFrame(animateOrb);
+    }
 
-  const light = new THREE.DirectionalLight(0xffffff, 1);
-  light.position.set(1, 1, 1);
-  scene.add(light);
+    function stopVisualizer() {
+      cancelAnimationFrame(animationFrameId);
+      if (audioContext) audioContext.close();
+      orb.style.transform = 'scale(1)';
+    }
 
-  const loader = new THREE.GLTFLoader();
-  loader.load("model.glb", function (gltf) {
-    model = gltf.scene;
-    scene.add(model);
+    async function handleRecordingStop() {
+      stopVisualizer();
+      orb.className = 'orb processing';
+      statusText.textContent = 'Processing...';
 
-    modelBoundingBox.setFromObject(model);
-    const center = modelBoundingBox.getCenter(new THREE.Vector3());
-    const size = modelBoundingBox.getSize(new THREE.Vector3()).length();
-
-    model.position.sub(center);
-    idealCameraDistance = size * 1.5;
-    camera.position.z = idealCameraDistance;
-    camera.lookAt(new THREE.Vector3());
-    controls.target.set(0, 0, 0);
-    controls.update();
-
-    mixer = new THREE.AnimationMixer(model);
-    gltf.animations.forEach(clip => {
-      const action = mixer.clipAction(clip);
-      animations[clip.name] = action;
-      const button = document.createElement('button');
-      button.textContent = clip.name;
-      button.onclick = () => {
-        Object.values(animations).forEach(a => a.stop());
-        action.reset().play();
-      };
-      document.getElementById("animation-list").appendChild(button);
-    });
-  });
-
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
-
-  animate();
-}
-
-function animate() {
-  requestAnimationFrame(animate);
-  if (mixer) mixer.update(0.016);
-  controls.update();
-  renderer.render(scene, camera);
-}
-
-function toggleAnimationMenu() {
-  const list = document.getElementById("animation-list");
-  list.style.display = list.style.display === 'block' ? 'none' : 'block';
-}
-
-function toggleChat(show) {
-  document.getElementById("chat-container").style.display = show ? 'flex' : 'none';
-  document.getElementById("chat-toggle-btn").style.display = show ? 'none' : 'flex';
-}
-
-const chatInput = document.getElementById("chat-input");
-const sendBtn = document.getElementById("send-btn");
-const voiceBtn = document.getElementById("voice-btn");
-const statusText = document.getElementById("status");
-const responseText = document.getElementById("responseText");
-const audioPlayer = document.getElementById("audioPlayer");
-
-sendBtn.addEventListener("click", sendToAI);
-voiceBtn.addEventListener("click", startVoiceInput);
-
-async function sendToAI() {
-  const input = chatInput.value;
-  statusText.textContent = "Thinking...";
-
-  const response = await fetch("http://localhost:5000/ask", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ prompt: input })
-  });
-
-  const data = await response.json();
-  responseText.textContent = data.text;
-  audioPlayer.src = "data:audio/mp3;base64," + data.audio;
-  audioPlayer.play();
-  statusText.textContent = "";
-}
-
-function startVoiceInput() {
-  if (!navigator.mediaDevices || !window.MediaRecorder) {
-    alert("Your browser does not support voice recording.");
-    return;
-  }
-
-  statusText.textContent = "Listening...";
-
-  navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
-    const mediaRecorder = new MediaRecorder(stream);
-    const audioChunks = [];
-
-    mediaRecorder.ondataavailable = event => {
-      audioChunks.push(event.data);
-    };
-
-    mediaRecorder.onstop = async () => {
-      statusText.textContent = "Transcribing...";
-
-      const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
+      const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
       const formData = new FormData();
-      formData.append("audio", audioBlob, "recording.webm");
+      formData.append('audio', audioBlob, 'recording.webm');
 
       try {
-        const response = await fetch("http://localhost:5000/transcribe", {
-          method: "POST",
-          body: formData
+        const transcriptRes = await fetch('http://localhost:5000/transcribe', { method: 'POST', body: formData });
+        const transcriptData = await transcriptRes.json();
+
+        const aiRes = await fetch('http://localhost:5000/ask', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt: transcriptData.text })
         });
+        const aiData = await aiRes.json();
 
-        const data = await response.json();
-        if (data.text) {
-          chatInput.value = data.text;
-          statusText.textContent = "Sending...";
-          sendToAI();
-        } else {
-          statusText.textContent = "Transcription failed.";
-        }
+        orb.className = 'orb speaking';
+        statusText.textContent = 'Speaking...';
+        debugOutput.textContent = `You said: "${transcriptData.text}"\nShaman: "${aiData.text}"`;
+
+        audioPlayer.src = 'data:audio/mp3;base64,' + aiData.audio;
+        audioPlayer.play();
+        audioPlayer.onended = () => {
+          orb.className = 'orb idle';
+          statusText.textContent = 'Hold to speak';
+        };
       } catch (err) {
-        console.error("Transcription error:", err);
-        statusText.textContent = "Error during transcription.";
+        console.error('[Error]', err);
+        statusText.textContent = 'Error during processing.';
+        orb.className = 'orb idle';
       }
-    };
+    }
 
-    mediaRecorder.start();
-    setTimeout(() => {
+    async function startVoiceInput(source = "UI or Arduino") {
+      if (isRecording) return;
+      isRecording = true;
+      orb.className = 'orb recording';
+      statusText.textContent = 'Recording... Speak now';
+
+      try {
+        await setupMicStream();
+      } catch (err) {
+        console.error('[Mic] Access error:', err);
+        statusText.textContent = 'Mic access denied';
+        orb.className = 'orb idle';
+        isRecording = false;
+      }
+    }
+
+    function stopVoiceInput() {
+      if (!isRecording) return;
+      isRecording = false;
       mediaRecorder.stop();
-    }, 5000);  // Automatically stop recording after 5 seconds
-  }).catch(err => {
-    console.error("Microphone error:", err);
-    statusText.textContent = "Mic access denied or unavailable.";
-  });
-}
+    }
 
-// Keyboard shortcut: P to trigger voice
-document.addEventListener("keydown", function (event) {
-  if (event.key === "p" || event.key === "P") {
-    startVoiceInput();
-  }
-});
+    // Mouse & Touch
+    orb.addEventListener('mousedown', () => startVoiceInput("orb"));
+    orb.addEventListener('mouseup', stopVoiceInput);
+    orb.addEventListener('touchstart', () => startVoiceInput("touch"));
+    orb.addEventListener('touchend', stopVoiceInput);
 
+    // Global Keyboard Trigger (works without clicking the orb)
+    document.addEventListener('keydown', (e) => {
+      if ((e.key === 'Enter' || e.key === ' ') && !isRecording) {
+        e.preventDefault();
+        startVoiceInput("keyboard");
+      }
+    });
+    document.addEventListener('keyup', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        stopVoiceInput();
+      }
+    });
+
+    // WebSocket for Arduino or other remote triggers
+    let socket;
+    try {
+      socket = new WebSocket(`ws://${location.hostname}:6789`);
+    } catch (e) {
+      console.error("[WebSocket] Failed to connect:", e);
+    }
+
+    if (socket) {
+      socket.addEventListener("open", () => console.log("[WebSocket] Connected."));
+      socket.addEventListener("message", (event) => {
+        if (event.data === "trigger_voice") {
+          startVoiceInput("arduino");
+        }
+      });
+      socket.addEventListener("error", (error) => console.error("[WebSocket] Error:", error));
+      socket.addEventListener("close", () => console.warn("[WebSocket] Connection closed."));
+    }
   </script>
 </body>
 </html>
-<!--
-  This HTML file contains a 3D viewer for a model, a chat interface, and voice input functionality.
-  The model is loaded using Three.js and GLTFLoader. The chat interface allows users to send text or voice messages to an AI backend.
-  The AI backend is expected to be running on localhost:5000 and should respond with text and audio data.
-  The audio data is played back using an HTML audio element. The chat interface can be toggled on and off with a button.
-  The animation menu allows users to select different animations for the model.
-  The code includes responsive design for mobile devices and uses CSS for styling.
-  The JavaScript code handles the 3D rendering, chat functionality, and voice recognition.
-  The chat input and response are styled for better user experience.
-  The code is structured to be easily maintainable and extendable for future features.
-  The model file (model.glb) should be placed in the same directory as this HTML file.
-  The AI backend should be implemented separately and should handle the requests from this frontend.
-  The AI backend should return a JSON response with "text" and "audio" fields.
-  The audio field should contain base64 encoded audio data.
-  The code is designed to be run in a modern web browser that supports WebGL and the Web Speech API.
