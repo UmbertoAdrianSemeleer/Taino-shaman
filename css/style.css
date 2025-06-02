@@ -1,0 +1,33 @@
+body {
+  font-family: sans-serif;
+  background: radial-gradient(circle, #f0f0f0, #cccccc);
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: #333;
+}
+
+#status {
+  font-size: 1.2rem;
+  color: #555;
+  padding: 1rem;
+  min-height: 3rem;
+  border: 2px dashed #aaa;
+  border-radius: 10px;
+  background-color: #fafafa;
+}
