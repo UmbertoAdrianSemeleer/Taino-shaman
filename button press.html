@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Talking Shaman</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: radial-gradient(circle, #f0f0f0, #cccccc);
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      text-align: center;
+      padding: 2rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      color: #333;
+    }
+
+    #status {
+      font-size: 1.2rem;
+      color: #555;
+      padding: 1rem;
+      min-height: 3rem;
+      border: 2px dashed #aaa;
+      border-radius: 10px;
+      background-color: #fafafa;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Talking Shaman</h1>
+    <div id="status">Waiting for connection...</div>
+  </div>
+
+  <script>
+    const socket = new WebSocket("ws://localhost:8765");
+
+    socket.onopen = () => {
+      document.getElementById("status").innerText = "Connected to WebSocket.";
+    };
+
+    socket.onmessage = async (event) => {
+      if (event.data === "button_clicked") {
+        document.getElementById("status").innerText = "Listening... Speak now.";
+        await startVoiceInput();
+      }
+    };
+
+    async function startVoiceInput() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const mediaRecorder = new MediaRecorder(stream);
+        const audioChunks = [];
+
+        mediaRecorder.ondataavailable = (event) => {
+          audioChunks.push(event.data);
+        };
+
+        mediaRecorder.onstop = async () => {
+          const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
+
+          const formData = new FormData();
+          formData.append("audio", audioBlob, "voice.webm");
+
+          document.getElementById("status").innerText = "Transcribing...";
+
+          const transcribeRes = await fetch("http://localhost:5000/transcribe", {
+            method: "POST",
+            body: formData
+          });
+
+          const transcribeJson = await transcribeRes.json();
+          const transcript = transcribeJson.text;
+          console.log("Transcript:", transcript);
+
+          if (!transcript) {
+            document.getElementById("status").innerText = "No speech detected.";
+            return;
+          }
+
+          document.getElementById("status").innerText = "Asking the Shaman...";
+          const askRes = await fetch("http://localhost:5000/ask", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ prompt: transcript })
+          });
+
+          const askJson = await askRes.json();
+          console.log("AI Response:", askJson.text);
+          document.getElementById("status").innerText = askJson.text;
+
+          const audio = new Audio("data:audio/mp3;base64," + askJson.audio);
+          audio.play();
+        };
+
+        mediaRecorder.start();
+        setTimeout(() => mediaRecorder.stop(), 4000); // 4 seconds max
+      } catch (err) {
+        console.error("Voice input error:", err);
+        document.getElementById("status").innerText = "Error: " + err.message;
+      }
+    }
+  </script>
+</body>
+</html>

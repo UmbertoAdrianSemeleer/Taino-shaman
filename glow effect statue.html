@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Video with PNG Under Statue</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .video-background video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+    }
+
+    .statue-container {
+      position: absolute;
+      top: 56%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50vw;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .overlay-image {
+      width: 100%;
+      height: auto;
+    }
+
+    .radial-image {
+      position: absolute;
+      bottom: -3%;             /* adjusts vertical position */
+      left: 52%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: auto;
+      z-index: -1;              /* behind statue image */
+      pointer-events: none;
+      opacity: 0.8; 
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      color: white;
+      text-align: center;
+      font-family: sans-serif;
+      margin-top: 10%;
+    }
+
+    .gif-effect {
+  position: absolute;
+  top: 56%;             /* match statue's vertical position */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30vw;          /* adjust size as needed */
+  height: auto;
+  z-index: 1;           /* below statue (z:2), above video (z:-1) */
+  pointer-events: none;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Background Video -->
+  <div class="video-background">
+    <video autoplay muted loop playsinline>
+      <source src="light pulse).mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+
+  <!-- Statue and PNG under it -->
+  <div class="statue-container">
+    <img class="overlay-image" src="taino_idle.png" alt="Statue Image">
+    <img class="radial-image" src="Ellipse v2.png" alt="Under Foot Image">
+  </div>
+
+
+</body>
+</html>
