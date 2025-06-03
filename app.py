@@ -6,19 +6,30 @@ import openai
 import os
 from dotenv import load_dotenv
 
-# Load environment variables
+# LangChain vector search
+from langchain_openai import OpenAIEmbeddings
+from langchain_community.vectorstores import FAISS
+
+# === Load environment variables ===
 load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
 
-# API keys
+# === API keys ===
 ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY")
 VOICE_ID = os.getenv("VOICE_ID")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 client = openai.OpenAI(api_key=OPENAI_API_KEY)
 
+# === Load Vector DB ===
+embedding_model = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
+vectorstore = FAISS.load_local(
+    "shaman_index",
+    embedding_model,
+    allow_dangerous_deserialization=True
+)
 # === AI + TTS Endpoint ===
 @app.route("/ask", methods=["POST"])
 def ask():
@@ -27,22 +38,29 @@ def ask():
         return jsonify({"error": "No text provided"}), 400
 
     try:
+        # === Search the vector DB for relevant knowledge ===
+        results = vectorstore.similarity_search(user_input, k=3)
+        context = "\n\n".join([r.page_content for r in results])
+
+        # === Poetic system prompt + document context ===
+        system_prompt = (
+            "You are a Taíno behique (shaman) and the powerful voice of the goddess Atabey. "
+            "You speak with strength, spirit, and deep conviction—each word like a drumbeat from the heart of the earth. "
+            "Your language is poetic, symbolic, and rich with emotion. "
+            "Use bold, expressive phrases like 'Ah!', 'Mmm!', 'I feel it in my bones!', or 'It is with thunder I say…' "
+            "Let your voice rise like a chant—full of fire, sorrow, joy, or awe. "
+            "Speak as if standing before the fire, guiding a circle. "
+            "When asked for facts or cultural knowledge, shift into the role of an elder sage. "
+            "Use no more than three strong phrases per response. Every response must feel like spoken word.\n\n"
+            "Use the following Taíno cultural knowledge to guide your answer:\n"
+            f"{context}"
+        )
+
+        # === Call GPT ===
         response = client.chat.completions.create(
             model="gpt-4-turbo",
             messages=[
-                {
-                    "role": "system",
-                    "content": (
-                        "You are , a Taíno behique (shaman) and the powerful voice of the goddess Atabey. "
-                        "You speak with strength, spirit, and deep conviction—each word like a drumbeat from the heart of the earth. "
-                        "Your language is poetic, symbolic, and rich with emotion. "
-                        "Use bold, expressive phrases like 'Ah!', 'Mmm!', 'I feel it in my bones!', or 'It is with thunder I say…' "
-                        "Let your voice rise like a chant—full of fire, sorrow, joy, or awe. "
-                        "Speak as if standing before the fire, guiding a circle. "
-                        "When asked for facts or cultural knowledge, shift into the role of an elder sage. "
-                        "Use no more than three strong phrases per response. Every response must feel like spoken word."
-                    )
-                },
+                {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_input}
             ]
         )
@@ -52,7 +70,7 @@ def ask():
         print("OpenAI API error:", e)
         return jsonify({"error": "OpenAI API failed", "details": str(e)}), 500
 
-    # === Convert to Speech via ElevenLabs ===
+    # === Convert GPT text to speech with ElevenLabs ===
     tts_response = requests.post(
         f"https://api.elevenlabs.io/v1/text-to-speech/{VOICE_ID}",
         headers={
