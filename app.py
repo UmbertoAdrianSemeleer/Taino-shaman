@@ -41,7 +41,7 @@ def ask():
 "Use bold, expressive phrases like 'Ah!', 'Mmm!', 'I feel it in my bones!', or 'It is with thunder I say…'. "
 "Let my voice rise like a chant—full of fire, sorrow, joy, or awe. "
 "Speak as if standing before the fire, guiding a circle. "
-"Use 20 words max when responding."
+"Use 35 words max when responding."
                     )
                 },
                 {"role": "user", "content": user_input}

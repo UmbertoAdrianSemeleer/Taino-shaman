@@ -79,7 +79,7 @@ async function handleRecordingStop() {
   }
 }
 
-async function startVoiceInput(source = "UI or Arduino") {
+async function startVoiceInput(source = "UI") {
   if (isRecording) return;
   isRecording = true;
   orb.className = 'orb recording';
@@ -119,25 +119,3 @@ document.addEventListener('keyup', (e) => {
     stopVoiceInput();
   }
 });
-
-// WebSocket
-let socket;
-try {
-  socket = new WebSocket(`ws://${location.hostname}:6789`);
-} catch (e) {
-  console.error("[WebSocket] Failed to connect:", e);
-}
-
-if (socket) {
-  socket.addEventListener("open", () => console.log("[WebSocket] Connected."));
-  socket.addEventListener("message", (event) => {
-    if (event.data === "trigger_voice") {
-      startVoiceInput("arduino");
-    }
-  });
-  socket.addEventListener("error", (error) => console.error("[WebSocket] Error:", error));
-  socket.addEventListener("close", () => {
-    console.warn("[WebSocket] Connection closed.");
-    debugOutput.textContent = 'Arduino trigger unavailable.';
-  });
-}
