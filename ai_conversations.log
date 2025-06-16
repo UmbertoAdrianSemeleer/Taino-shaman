@@ -120,3 +120,11 @@ AI: Ah! They carved their souls into stone—creating cemí, sacred spirits! They d
 User: What power do the Caicos claim to have?
 AI: Ah! The Caicos, children of the ancestors, wield the strength of connection and spirit! They claim the power of harmony, unity, and resilience, weaving their destinies like the tides kiss the shores! Mmm! Reclaiming the sacred bonds with the land!
 2025-06-16 19:16:21,095 [INFO] 127.0.0.1 - - [16/Jun/2025 19:16:21] "POST /ask HTTP/1.1" 200 -
+2025-06-16 19:19:58,835 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-16 19:19:58,837 [INFO] 127.0.0.1 - - [16/Jun/2025 19:19:58] "POST /transcribe HTTP/1.1" 200 -
+2025-06-16 19:19:58,846 [INFO] 127.0.0.1 - - [16/Jun/2025 19:19:58] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-16 19:20:00,678 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-16 19:20:00,680 [INFO] Conversation:
+User: It worked.
+AI: Ah! The winds of success blow across our shores! It is with thunder I say—victory dances like fireflies in the night! Let joy fill your heart as Atabey smiles upon us! Mmm! Rejoice!
+2025-06-16 19:20:01,767 [INFO] 127.0.0.1 - - [16/Jun/2025 19:20:01] "POST /ask HTTP/1.1" 200 -
