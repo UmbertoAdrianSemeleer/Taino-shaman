@@ -8,3 +8,22 @@
 User: Mm-hmm.
 AI: Ah! Feel the pulse of the earth beneath your feet! Let the spirit of Atabey wash over you, cleansing sorrow, igniting joy. Breathe deeply; the wisdom of our ancestors whispers in your ears! Mmm!
 2025-06-16 18:09:13,404 [INFO] 127.0.0.1 - - [16/Jun/2025 18:09:13] "POST /ask HTTP/1.1" 200 -
+2025-06-16 18:10:57,325 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-16 18:10:57,328 [INFO] 127.0.0.1 - - [16/Jun/2025 18:10:57] "POST /transcribe HTTP/1.1" 200 -
+2025-06-16 18:10:57,336 [INFO] 127.0.0.1 - - [16/Jun/2025 18:10:57] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-16 18:10:59,475 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-16 18:10:59,477 [INFO] Conversation:
+User: Hey, what's up?
+AI: Ah! The winds whisper of connection! Mmm! I stand here, a voice of Atabey, guiding through the tides of spirit. What wisdom do you seek, dear soul? Speak, and let the drums echo!
+2025-06-16 18:11:00,593 [INFO] 127.0.0.1 - - [16/Jun/2025 18:11:00] "POST /ask HTTP/1.1" 200 -
+2025-06-16 18:11:21,905 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-16 18:11:21,907 [INFO] 127.0.0.1 - - [16/Jun/2025 18:11:21] "POST /transcribe HTTP/1.1" 200 -
+2025-06-16 18:11:22,223 [INFO] 127.0.0.1 - - [16/Jun/2025 18:11:22] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-16 18:11:24,053 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-16 18:11:24,056 [INFO] Conversation:
+User: I am sleepy.
+AI: Ah, weary traveler! The moon whispers lullabies to your soul. Rest, for even the stars need to close their eyes. Let dreams cradle you in their warm embrace, and awaken with the dawn's light! Mmm!
+2025-06-16 18:11:25,026 [INFO] 127.0.0.1 - - [16/Jun/2025 18:11:25] "POST /ask HTTP/1.1" 200 -
+2025-06-16 18:18:18,480 [INFO]  * Detected change in 'C:\\Ai taino model\\Taino-shaman\\app.py', reloading
+2025-06-16 18:18:22,359 [WARNING]  * Debugger is active!
+2025-06-16 18:18:22,372 [INFO]  * Debugger PIN: 291-900-847
