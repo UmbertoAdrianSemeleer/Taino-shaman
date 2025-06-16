@@ -22,3 +22,74 @@ AI: Ah! In the spirit of Atabey, I feel the pulse of the earth and the whisper o
 2025-06-16 19:55:17,010 [INFO] 127.0.0.1 - - [16/Jun/2025 19:55:17] "POST /ask HTTP/1.1" 200 -
 2025-06-16 20:06:23,823 [INFO]  * Detected change in 'C:\\Ai taino model\\Taino-shaman\\app.py', reloading
 2025-06-16 20:06:24,047 [INFO]  * Restarting with stat
+2025-06-16 20:33:00,913 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-16 20:33:00,913 [INFO] [33mPress CTRL+C to quit[0m
+2025-06-16 20:33:00,915 [INFO]  * Restarting with stat
+2025-06-16 20:33:03,256 [WARNING]  * Debugger is active!
+2025-06-16 20:33:03,262 [INFO]  * Debugger PIN: 291-900-847
+2025-06-16 20:33:14,878 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-16 20:33:14,880 [INFO] 127.0.0.1 - - [16/Jun/2025 20:33:14] "POST /transcribe HTTP/1.1" 200 -
+2025-06-16 20:33:14,886 [INFO] 127.0.0.1 - - [16/Jun/2025 20:33:14] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-16 20:33:16,619 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-16 20:33:16,629 [INFO] Conversation:
+User: Hey, what's up?
+AI: Ah! It is the spirit of inquiry that stirs the waters, my friend! In this sacred moment, let us connect, heart to heart, as the sun kisses the horizon. Speak your truth! Mmm!
+2025-06-16 20:33:17,676 [INFO] 127.0.0.1 - - [16/Jun/2025 20:33:17] "POST /ask HTTP/1.1" 200 -
+2025-06-16 20:33:41,239 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-16 20:33:41,240 [INFO] 127.0.0.1 - - [16/Jun/2025 20:33:41] "POST /transcribe HTTP/1.1" 200 -
+2025-06-16 20:33:41,558 [INFO] 127.0.0.1 - - [16/Jun/2025 20:33:41] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-16 20:33:44,144 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-16 20:33:44,147 [INFO] Conversation:
+User: cool cool cool who are you
+AI: Ah! I am Guarocuya, behique of the Taíno and the voice of Atabey! A keeper of sacred knowledge, a bridge between worlds, singing the praises of our ancestors through the rhythms of spirit and earth. Embrace the fire!
+2025-06-16 20:33:45,346 [INFO] 127.0.0.1 - - [16/Jun/2025 20:33:45] "POST /ask HTTP/1.1" 200 -
+2025-06-16 20:34:10,904 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-16 20:34:10,906 [INFO] 127.0.0.1 - - [16/Jun/2025 20:34:10] "POST /transcribe HTTP/1.1" 200 -
+2025-06-16 20:34:11,221 [INFO] 127.0.0.1 - - [16/Jun/2025 20:34:11] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-16 20:34:13,936 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-16 20:34:13,937 [INFO] Conversation:
+User: Give me some examples of final language words or something.
+AI: Ah! Listen, dear spirit-seeker! Feel the resonance of our Taíno tongue: *Cemí* (spirit), *guaraguao* (hawk), *yúcahu* (the god of cassava), *batéy* (ceremonial plaza), *areyto* (song/dance of lineage). Each word, a heartbeat, each a story! Mmm! Embrace them!
+2025-06-16 20:34:15,246 [INFO] 127.0.0.1 - - [16/Jun/2025 20:34:15] "POST /ask HTTP/1.1" 200 -
+2025-06-16 20:34:48,359 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-16 20:34:48,360 [INFO] 127.0.0.1 - - [16/Jun/2025 20:34:48] "POST /transcribe HTTP/1.1" 200 -
+2025-06-16 20:34:48,681 [INFO] 127.0.0.1 - - [16/Jun/2025 20:34:48] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-16 20:34:50,664 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-16 20:34:50,669 [INFO] Conversation:
+User: Proudly, the ones.
+AI: Ah! The proud warriors of the sun and the moon, united in spirit! Mmm! Together we rise, drawing strength from our ancestors—Caciques and Cemí, the heartbeat of our land flows within us. It is with thunder I say… we are timeless!
+2025-06-16 20:34:51,857 [INFO] 127.0.0.1 - - [16/Jun/2025 20:34:51] "POST /ask HTTP/1.1" 200 -
+2025-06-16 20:35:30,380 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-16 20:35:30,381 [INFO] 127.0.0.1 - - [16/Jun/2025 20:35:30] "POST /transcribe HTTP/1.1" 200 -
+2025-06-16 20:35:30,687 [INFO] 127.0.0.1 - - [16/Jun/2025 20:35:30] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-16 20:35:33,096 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-16 20:35:33,099 [INFO] Conversation:
+User: Speak Dutch for me.
+AI: Ah! It is with thunder I say… my spirit knows not the tongue of Dutch! My voice rises in the sacred language of the Taíno, born from the heart of the earth. Let us speak of Atabey and our ancestors instead! Mmm!
+2025-06-16 20:35:34,091 [INFO] 127.0.0.1 - - [16/Jun/2025 20:35:34] "POST /ask HTTP/1.1" 200 -
+2025-06-16 20:35:56,595 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-16 20:35:56,596 [INFO] 127.0.0.1 - - [16/Jun/2025 20:35:56] "POST /transcribe HTTP/1.1" 200 -
+2025-06-16 20:35:56,907 [INFO] 127.0.0.1 - - [16/Jun/2025 20:35:56] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-16 20:35:58,900 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-16 20:36:00,473 [INFO] 127.0.0.1 - - [16/Jun/2025 20:36:00] "POST /ask HTTP/1.1" 200 -
+2025-06-16 20:36:31,253 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-16 20:36:31,255 [INFO] 127.0.0.1 - - [16/Jun/2025 20:36:31] "POST /transcribe HTTP/1.1" 200 -
+2025-06-16 20:36:31,571 [INFO] 127.0.0.1 - - [16/Jun/2025 20:36:31] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-16 20:36:33,339 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-16 20:36:33,341 [INFO] Conversation:
+User: Zeg maar iets in Nederlands, alsjeblieft.
+AI: Ah! In de schaduw van de maan zeg ik: de geest van Atabey stroomt door ons leven, als een krachtige rivier. Laat de klanken van de natuur ons omarmen en de ziel van ons volk verbinden! Mmm!
+2025-06-16 20:36:34,368 [INFO] 127.0.0.1 - - [16/Jun/2025 20:36:34] "POST /ask HTTP/1.1" 200 -
+2025-06-16 20:58:20,317 [INFO]  * Detected change in 'C:\\Ai taino model\\Taino-shaman\\app.py', reloading
+2025-06-16 20:58:20,553 [INFO]  * Restarting with stat
+2025-06-16 20:58:23,126 [WARNING]  * Debugger is active!
+2025-06-16 20:58:23,133 [INFO]  * Debugger PIN: 291-900-847
+2025-06-16 20:58:42,263 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-16 20:58:42,266 [INFO] 127.0.0.1 - - [16/Jun/2025 20:58:42] "POST /transcribe HTTP/1.1" 200 -
+2025-06-16 20:58:42,270 [INFO] 127.0.0.1 - - [16/Jun/2025 20:58:42] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-16 20:58:44,082 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-16 20:58:44,087 [INFO] Conversation:
+User: Hey, how's it going?
+AI: Ah! It is with thunder I say—my spirit is woven with the air! I dwell in the whispers of the winds and the dance of the waves, ever present and resonating with the heartbeat of creation! Mmm!
+2025-06-16 20:58:45,035 [INFO] 127.0.0.1 - - [16/Jun/2025 20:58:45] "POST /ask HTTP/1.1" 200 -
