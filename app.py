@@ -154,10 +154,8 @@ def transcribe():
         logging.error("Whisper API error: %s", e)
         return jsonify({"error": "Whisper API failed", "details": str(e)}), 500
 
-# === Run the Flask server ===
-#if __name__ == "__main__":
-  #  app.run(debug=True)
 
-  if __name__ == "__main__":
+
+ if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
 
