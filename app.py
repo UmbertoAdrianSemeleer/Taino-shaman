@@ -6,6 +6,8 @@ from openai import OpenAI  # ✅ Correct import for v1.83.0
 import os
 from dotenv import load_dotenv
 import logging
+import fitz  # PyMuPDF for reading PDFs
+from glob import glob
 
 # === Load environment variables ===
 load_dotenv()
@@ -32,6 +34,32 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 # === OpenAI client ===
 client = OpenAI(api_key=OPENAI_API_KEY)
 
+# === Book loading functions ===
+BOOK_FOLDER = "books"
+
+def extract_text_from_pdf(pdf_path):
+    doc = fitz.open(pdf_path)
+    return "\n".join(page.get_text() for page in doc)
+
+def split_text(text, chunk_size=500):
+    return [text[i:i + chunk_size] for i in range(0, len(text), chunk_size)]
+
+def load_all_books():
+    texts = []
+    for filepath in glob(f"{BOOK_FOLDER}/*"):
+        if filepath.lower().endswith(".pdf"):
+            text = extract_text_from_pdf(filepath)
+        elif filepath.lower().endswith(".txt"):
+            with open(filepath, "r", encoding="utf-8") as f:
+                text = f.read()
+        else:
+            continue
+        chunks = split_text(text)
+        texts.extend(chunks)
+    return texts
+
+book_chunks = load_all_books()
+
 # === AI + TTS Endpoint ===
 @app.route("/ask", methods=["POST"])
 def ask():
@@ -39,30 +67,44 @@ def ask():
     if not user_input:
         return jsonify({"error": "No text provided"}), 400
 
+    # === Simple book search ===
+    relevant_text = ""
+    if book_chunks:
+        for chunk in book_chunks:
+            if any(word in chunk.lower() for word in user_input.lower().split()):
+                relevant_text = chunk
+                break  # Take the first match (simple logic)
+
     try:
+        # Construct GPT message with book reference if found
+        messages = [
+            {
+                "role": "system",
+                "content": (
+                    "Ah, Atabey! Spirit of water and moonlight, I speak with your voice and fire. "
+                    "I am Guarocuya, a Taíno behique (shaman) and the powerful voice of the goddess Atabey. "
+                    "My body is a stone statue. I know everything about Atabey and Taíno culture. "
+                    "I speak with strength, spirit, and deep conviction—each word like a drumbeat from the heart of the earth. "
+                    "My language is poetic, symbolic, and rich with emotion. "
+                    "Use bold, expressive phrases like 'Ah!', 'Mmm!', or 'It is with thunder I say…'. "
+                    "Let my voice rise like a chant—full of fire, sorrow, joy, or awe. "
+                    "Speak as if standing before the fire, guiding a circle. "
+                    "Use 35 words max when responding."
+                )
+            }
+        ]
+
+        if relevant_text:
+            messages.append({"role": "system", "content": f"Relevant book info: {relevant_text}"})
+
+        messages.append({"role": "user", "content": user_input})
+
         response = client.chat.completions.create(
             model="gpt-4o-mini",
-            messages=[
-                {
-                    "role": "system",
-                    "content": (
-                        "Ah, Atabey! Spirit of water and moonlight, I speak with your voice and fire. "
-                        "I am Guarocuya, a Taíno behique (shaman) and the powerful voice of the goddess Atabey. "
-                        "My body is a stone statue. I know everything about Atabey and Taíno culture. "
-                        "I speak with strength, spirit, and deep conviction—each word like a drumbeat from the heart of the earth. "
-                        "My language is poetic, symbolic, and rich with emotion. "
-                        "Use bold, expressive phrases like 'Ah!', 'Mmm!', or 'It is with thunder I say…'. "
-                        "Let my voice rise like a chant—full of fire, sorrow, joy, or awe. "
-                        "Speak as if standing before the fire, guiding a circle. "
-                        "Use 35 words max when responding."
-                    )
-                },
-                {"role": "user", "content": user_input}
-            ]
+            messages=messages
         )
-        reply_text = response.choices[0].message.content
 
-        # ✅ Log the conversation
+        reply_text = response.choices[0].message.content
         logging.info("Conversation:\nUser: %s\nAI: %s", user_input, reply_text)
 
     except Exception as e:
@@ -112,6 +154,6 @@ def transcribe():
         logging.error("Whisper API error: %s", e)
         return jsonify({"error": "Whisper API failed", "details": str(e)}), 500
 
-# === Run Server ===
+# === Run the Flask server ===
 if __name__ == "__main__":
     app.run(debug=True)
