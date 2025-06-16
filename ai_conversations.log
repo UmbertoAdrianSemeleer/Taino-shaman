@@ -20,3 +20,5 @@ AI: Ah! The winds whisper secrets! A new day dawns, bringing the pulse of life a
 User: Hello there, how's it going?
 AI: Ah! In the spirit of Atabey, I feel the pulse of the earth and the whisper of the wind. All flows like a river—alive, vibrant! What brings you to this sacred circle today? Mmm!
 2025-06-16 19:55:17,010 [INFO] 127.0.0.1 - - [16/Jun/2025 19:55:17] "POST /ask HTTP/1.1" 200 -
+2025-06-16 20:06:23,823 [INFO]  * Detected change in 'C:\\Ai taino model\\Taino-shaman\\app.py', reloading
+2025-06-16 20:06:24,047 [INFO]  * Restarting with stat
