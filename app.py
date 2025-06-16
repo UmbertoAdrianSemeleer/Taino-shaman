@@ -5,19 +5,31 @@ from flask_cors import CORS
 from openai import OpenAI  # ✅ Correct import for v1.83.0
 import os
 from dotenv import load_dotenv
+import logging
 
-# Load environment variables
+# === Load environment variables ===
 load_dotenv()
 
+# === Set up logging ===
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.FileHandler("ai_conversations.log"),
+        logging.StreamHandler()
+    ]
+)
+
+# === Flask app setup ===
 app = Flask(__name__)
 CORS(app)
 
-# API keys from .env
+# === API Keys ===
 ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY")
 VOICE_ID = os.getenv("VOICE_ID")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-# OpenAI client setup (correct for v1.83.0)
+# === OpenAI client ===
 client = OpenAI(api_key=OPENAI_API_KEY)
 
 # === AI + TTS Endpoint ===
@@ -50,8 +62,11 @@ def ask():
         )
         reply_text = response.choices[0].message.content
 
+        # ✅ Log the conversation
+        logging.info("Conversation:\nUser: %s\nAI: %s", user_input, reply_text)
+
     except Exception as e:
-        print("OpenAI API error:", e)
+        logging.error("OpenAI API error: %s", e)
         return jsonify({"error": "OpenAI API failed", "details": str(e)}), 500
 
     # === Convert to Speech via ElevenLabs ===
@@ -72,6 +87,7 @@ def ask():
     )
 
     if tts_response.status_code != 200:
+        logging.error("TTS failed: %s", tts_response.text)
         return jsonify({"error": "TTS failed", "details": tts_response.text}), 500
 
     audio_base64 = base64.b64encode(tts_response.content).decode("utf-8")
@@ -93,7 +109,7 @@ def transcribe():
         )
         return jsonify({"text": response.text})
     except Exception as e:
-        print("Whisper API error:", e)
+        logging.error("Whisper API error: %s", e)
         return jsonify({"error": "Whisper API failed", "details": str(e)}), 500
 
 # === Run Server ===

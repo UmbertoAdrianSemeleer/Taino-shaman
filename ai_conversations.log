@@ -1,0 +1,10 @@
+2025-06-16 18:08:57,460 [WARNING]  * Debugger is active!
+2025-06-16 18:08:57,474 [INFO]  * Debugger PIN: 291-900-847
+2025-06-16 18:09:08,780 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-16 18:09:08,784 [INFO] 127.0.0.1 - - [16/Jun/2025 18:09:08] "POST /transcribe HTTP/1.1" 200 -
+2025-06-16 18:09:08,793 [INFO] 127.0.0.1 - - [16/Jun/2025 18:09:08] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-16 18:09:12,157 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-16 18:09:12,162 [INFO] Conversation:
+User: Mm-hmm.
+AI: Ah! Feel the pulse of the earth beneath your feet! Let the spirit of Atabey wash over you, cleansing sorrow, igniting joy. Breathe deeply; the wisdom of our ancestors whispers in your ears! Mmm!
+2025-06-16 18:09:13,404 [INFO] 127.0.0.1 - - [16/Jun/2025 18:09:13] "POST /ask HTTP/1.1" 200 -
