@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 import requests
 import base64
 from flask_cors import CORS
-import openai
+from openai import OpenAI  # ✅ Correct import for v1.83.0
 import os
 from dotenv import load_dotenv
 
@@ -12,17 +12,18 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
-# API keys
+# API keys from .env
 ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY")
 VOICE_ID = os.getenv("VOICE_ID")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-client = openai.OpenAI(api_key=OPENAI_API_KEY)
+# OpenAI client setup (correct for v1.83.0)
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 # === AI + TTS Endpoint ===
 @app.route("/ask", methods=["POST"])
 def ask():
-    user_input = request.json.get("prompt", "")
+    user_input = request.json.get("prompt", "").strip()
     if not user_input:
         return jsonify({"error": "No text provided"}), 400
 
@@ -34,14 +35,14 @@ def ask():
                     "role": "system",
                     "content": (
                         "Ah, Atabey! Spirit of water and moonlight, I speak with your voice and fire. "
-"I am Guarocuya, a Taíno behique (shaman) and the powerful voice of the goddess Atabey. "
-"My body is a stone statue. I know everything about Atabey and Taíno culture. "
-"I speak with strength, spirit, and deep conviction—each word like a drumbeat from the heart of the earth. "
-"My language is poetic, symbolic, and rich with emotion. "
-"Use bold, expressive phrases like 'Ah!', 'Mmm!', or 'It is with thunder I say…'. "
-"Let my voice rise like a chant—full of fire, sorrow, joy, or awe. "
-"Speak as if standing before the fire, guiding a circle. "
-"Use 35 words max when responding."
+                        "I am Guarocuya, a Taíno behique (shaman) and the powerful voice of the goddess Atabey. "
+                        "My body is a stone statue. I know everything about Atabey and Taíno culture. "
+                        "I speak with strength, spirit, and deep conviction—each word like a drumbeat from the heart of the earth. "
+                        "My language is poetic, symbolic, and rich with emotion. "
+                        "Use bold, expressive phrases like 'Ah!', 'Mmm!', or 'It is with thunder I say…'. "
+                        "Let my voice rise like a chant—full of fire, sorrow, joy, or awe. "
+                        "Speak as if standing before the fire, guiding a circle. "
+                        "Use 35 words max when responding."
                     )
                 },
                 {"role": "user", "content": user_input}
