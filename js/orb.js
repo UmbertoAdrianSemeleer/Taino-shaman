@@ -1,121 +1,40 @@
-const orb = document.getElementById('orb');
-const statusText = document.getElementById('statusText');
-const debugOutput = document.getElementById('debugOutput');
-const audioPlayer = new Audio();
+// Get references to HTML elements
+const orb = document.getElementById('orb');             // The visual orb element
+const statusText = document.getElementById('statusText'); // Text element to show status like "Recording..." etc.
+const debugOutput = document.getElementById('debugOutput'); // Element to show debug info like what the user said
+const audioPlayer = new Audio();                         // Used to play back the spoken AI response
 
-let isRecording = false;
-let audioContext, analyser, dataArray, animationFrameId;
-let mediaRecorder, audioChunks = [];
+// Set up state variables
+let isRecording = false;                                 // Tracks if the mic is recording
+let audioContext, analyser, dataArray, animationFrameId; // For mic visualizer
+let mediaRecorder, audioChunks = [];                     // For recording mic audio
 
+// Ask the browser to access the microphone
 async function setupMicStream() {
-  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-  setupMicVisualizer(stream);
-  mediaRecorder = new MediaRecorder(stream);
-  audioChunks = [];
+  const stream = await navigator.mediaDevices.getUserMedia({ audio: true }); // Ask for mic access
+  setupMicVisualizer(stream);                    // Start the visualizer (the orb changes size with sound)
+  mediaRecorder = new MediaRecorder(stream);     // Create a recorder from the mic stream
+  audioChunks = [];                              // Reset recorded audio chunks
 
+  // Save audio data as it's recorded
   mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+
+  // When recording stops, process the audio
   mediaRecorder.onstop = handleRecordingStop;
+
+  // Start recording
   mediaRecorder.start();
 }
 
+// Set up mic visual feedback (orb changes size with voice volume)
 function setupMicVisualizer(stream) {
-  audioContext = new (window.AudioContext || window.webkitAudioContext)();
-  const source = audioContext.createMediaStreamSource(stream);
-  analyser = audioContext.createAnalyser();
+  audioContext = new (window.AudioContext || window.webkitAudioContext)(); // Create audio context
+  const source = audioContext.createMediaStreamSource(stream);             // Use mic as input
+  analyser = audioContext.createAnalyser();                                // Analyze sound volume
   analyser.fftSize = 512;
-  dataArray = new Uint8Array(analyser.frequencyBinCount);
-  source.connect(analyser);
-  animateOrb();
+  dataArray = new Uint8Array(analyser.frequencyBinCount);                 // Data array for frequencies
+  source.connect(analyser);                                               // Connect mic to analyzer
+  animateOrb();                                                           // Start animation loop
 }
 
-function animateOrb() {
-  analyser.getByteFrequencyData(dataArray);
-  const avg = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
-  const scale = 1 + avg / 256;
-  orb.style.transform = `scale(${scale.toFixed(2)})`;
-  animationFrameId = requestAnimationFrame(animateOrb);
-}
-
-function stopVisualizer() {
-  cancelAnimationFrame(animationFrameId);
-  if (audioContext) audioContext.close();
-  orb.style.transform = 'scale(1)';
-}
-
-async function handleRecordingStop() {
-  stopVisualizer();
-  orb.className = 'orb processing';
-  statusText.textContent = 'Processing...';
-
-  const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-  const formData = new FormData();
-  formData.append('audio', audioBlob, 'recording.webm');
-
-  try {
-    const transcriptRes = await fetch('http://localhost:5000/transcribe', { method: 'POST', body: formData });
-    const transcriptData = await transcriptRes.json();
-
-    const aiRes = await fetch('http://localhost:5000/ask', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt: transcriptData.text })
-    });
-    const aiData = await aiRes.json();
-
-    orb.className = 'orb speaking';
-    statusText.textContent = 'Speaking...';
-    debugOutput.textContent = `You said: "${transcriptData.text}"\nShaman: "${aiData.text}"`;
-
-    audioPlayer.src = 'data:audio/mp3;base64,' + aiData.audio;
-    audioPlayer.play();
-    audioPlayer.onended = () => {
-      orb.className = 'orb idle';
-      statusText.textContent = 'Click or press a key to speak';
-    };
-  } catch (err) {
-    console.error('[Error]', err);
-    statusText.textContent = 'Error during processing.';
-    orb.className = 'orb idle';
-  }
-}
-
-async function startVoiceInput(source = "UI") {
-  if (isRecording) return;
-  isRecording = true;
-  orb.className = 'orb recording';
-  statusText.textContent = 'Recording... Speak now';
-
-  try {
-    await setupMicStream();
-  } catch (err) {
-    console.error('[Mic] Access error:', err);
-    statusText.textContent = 'Mic access denied';
-    orb.className = 'orb idle';
-    isRecording = false;
-  }
-}
-
-function stopVoiceInput() {
-  if (!isRecording) return;
-  isRecording = false;
-  mediaRecorder.stop();
-}
-
-// Input Events
-orb.addEventListener('mousedown', () => startVoiceInput("orb"));
-orb.addEventListener('mouseup', stopVoiceInput);
-orb.addEventListener('touchstart', () => startVoiceInput("touch"));
-orb.addEventListener('touchend', stopVoiceInput);
-
-// Keyboard
-document.addEventListener('keydown', (e) => {
-  if ((e.key === 'Enter' || e.key === ' ') && !isRecording) {
-    e.preventDefault();
-    startVoiceInput("keyboard");
-  }
-});
-document.addEventListener('keyup', (e) => {
-  if (e.key === 'Enter' || e.key === ' ') {
-    stopVoiceInput();
-  }
-});
+// An
