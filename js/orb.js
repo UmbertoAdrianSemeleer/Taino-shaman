@@ -2,6 +2,9 @@ const orb = document.getElementById('orb');
 const statusText = document.getElementById('statusText');
 const debugOutput = document.getElementById('debugOutput');
 const audioPlayer = new Audio();
+const thinkingAudio = new Audio('/static/driping water.mp3');
+thinkingAudio.loop = true;
+thinkingAudio.volume = 0.6;
 
 let isRecording = false;
 let audioContext, analyser, dataArray, animationFrameId;
@@ -47,6 +50,9 @@ async function handleRecordingStop() {
   orb.className = 'orb processing';
   statusText.textContent = 'Processing...';
 
+  thinkingAudio.currentTime = 0;
+  thinkingAudio.play();
+
   const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
   const formData = new FormData();
   formData.append('audio', audioBlob, 'recording.webm');
@@ -62,6 +68,9 @@ async function handleRecordingStop() {
     });
     const aiData = await aiRes.json();
 
+    thinkingAudio.pause();
+    thinkingAudio.currentTime = 0;
+
     orb.className = 'orb speaking';
     statusText.textContent = 'Speaking...';
     debugOutput.textContent = `You said: "${transcriptData.text}"\nShaman: "${aiData.text}"`;
@@ -73,6 +82,8 @@ async function handleRecordingStop() {
       statusText.textContent = 'Click or press a key to speak';
     };
   } catch (err) {
+    thinkingAudio.pause();
+    thinkingAudio.currentTime = 0;
     console.error('[Error]', err);
     statusText.textContent = 'Error during processing.';
     orb.className = 'orb idle';
