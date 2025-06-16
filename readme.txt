@@ -1,88 +1,169 @@
-# Talking Taíno Shaman AI
+TALKING SHAMAN – WHISPERS OF ATABEY
 
-A local, browser-based AI that simulates a Taíno *behique* (shaman), designed to engage users with poetic and spiritual responses using ChatGPT and ElevenLabs TTS.
+An interactive voice-based AI prototype embodying a Taíno behique (shaman) to preserve and share cultural knowledge through poetic storytelling.
 
----
+============================================================
 
-## 🧠 What It Does
-- Accepts **typed or spoken input** from a user in the browser
-- Uses **OpenAI (ChatGPT)** to generate poetic, wisdom-filled replies
-- Uses **ElevenLabs** to speak the response aloud using the "Clyde" voice
-- Mimics the style and tone of a Taíno shaman, referencing nature, spirits, and ancestral knowledge
+ABOUT THE PROJECT
 
----
+Talking Shaman is a locally hosted AI experience that simulates a conversation with a Taíno behique (shaman). Users speak into a microphone and receive poetic responses grounded in Taíno cultural themes. The system combines speech recognition, language modeling, and voice synthesis to create a responsive, symbolic digital oracle.
 
-## 🚀 How to Run Locally
+Key features:
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/your-username/taino-shaman-ai.git
-cd taino-shaman-ai
-```
+Real-time speech input via microphone
 
-### 2. Set Up Virtual Environment (Windows)
-```bash
-python -m venv ai-env
-./ai-env/Scripts/activate.bat
-```
+Poetic, symbolic AI responses with cultural nuance
 
-### 3. Install Dependencies
-```bash
+ElevenLabs-generated voice for immersion
+
+Ambient dripping sound while the AI "thinks"
+
+============================================================
+
+TECH STACK
+
+Python 3.11+
+
+Flask (API server)
+
+OpenAI API (GPT-4o mini + Whisper)
+
+ElevenLabs TTS API
+
+JavaScript frontend with Web Audio API
+
+PyMuPDF for extracting text from PDFs
+
+============================================================
+
+FOLDER STRUCTURE
+
+project-root/
+├── app.py                   (Flask backend)
+├── requirements.txt         (Python dependencies)
+├── .env                     (Environment variables - not committed)
+├── static/
+│   └── dripping-water.mp3   (Processing sound)
+├── templates/
+│   └── index.html           (Frontend UI)
+├── js/                      (JavaScript logic)
+├── css/                     (CSS styling)
+└── books/                   (PDF or TXT files with cultural data)
+
+============================================================
+
+HOW TO RUN LOCALLY
+
+Clone the repo:
+git clone https://github.com/YourUsername/Taino-shaman.git
+cd Taino-shaman
+
+Install dependencies:
 pip install -r requirements.txt
-```
 
-### 4. Create a `.env` File with Your API Keys
-```env
+Create a file named .env with:
 OPENAI_API_KEY=your-openai-key
 ELEVENLABS_API_KEY=your-elevenlabs-key
-VOICE_ID=2EiwWnXFnvU5JabPnv8n
-```
+VOICE_ID=your-elevenlabs-voice-id
 
-### 5. Run the Flask Server
-```bash
+Start the Flask app:
 python app.py
-```
 
-### 6. Open the Interface
-- Open `index.html` in your browser (Chrome recommended)
-- Click the mic to talk, or type a message
-- The shaman will respond with audio
+Open your browser at:
+http://localhost:5000
 
----
+============================================================
 
-## 📦 requirements.txt
-```
-Flask
-flask-cors
-requests
-openai
-python-dotenv
-```
+DEPLOYMENT NOTE
 
----
+If deploying online (e.g., Render):
 
-## 🛡️ Security
-- All secrets are stored in a `.env` file
-- `.env` is excluded from version control via `.gitignore`
-- Never commit your API keys to GitHub
+Change app.run() to use host="0.0.0.0", port=10000
 
----
+Ensure 'fitz' (PyMuPDF) is listed in requirements.txt
 
-## 📄 License
-This project is for educational and cultural exploration purposes. The C4 model and AI backend structure were inspired by Simon Brown's [C4 Model](https://c4model.com/).
+Use environment variable UI instead of .env file
 
----
+Indentation must use spaces (not tabs)
 
-## ✨ Future Ideas
-- Add 3D avatar using Three.js
-- Add myth/story/riddle buttons
-- Support multiple languages (English, Spanish, Dutch)
-- Host online for live interaction
+============================================================
 
----
+FEATURES
 
-## 🔗 Related Tools
-- [OpenAI API](https://platform.openai.com/)
-- [ElevenLabs API](https://www.elevenlabs.io/)
-- [Flask (Python)](https://flask.palletsprojects.com/)
-- [MDN Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
+Voice interaction from recording to spoken reply
+
+Knowledge base loaded from PDFs or text
+
+Symbolic and poetic system personality
+
+Animated orb with ambient audio during thinking
+
+Conversation debug log visible in UI
+
+============================================================
+
+HOW TO CHANGE THE PERSONALITY
+
+Edit app.py, look for this section:
+
+messages = [
+{
+"role": "system",
+"content": "Ah, Atabey! Spirit of water and moonlight, I speak with your voice and fire..."
+}
+]
+
+To customize:
+
+Change the "content" text to define tone and style
+
+Save and restart app.py
+
+You can create new personas such as a warrior, elder, or healer.
+
+============================================================
+
+VOICE SETTINGS
+
+This project uses a custom ElevenLabs voice.
+
+PRIMARY VOICE:
+https://elevenlabs.io/app/voice-lab/share/e9a6840c69b79812b77ea81fa11d55aaf80dcf1938fa0137bf7f514f67f75c99/eBthAb30UYbt2nojGXeA
+
+BACKUP VOICE:
+Regina Martin – calm, mature Brazilian Portuguese narrative voice
+
+To use either:
+
+Copy the voice ID from ElevenLabs
+
+Paste into your .env file as VOICE_ID
+
+============================================================
+
+============================================================
+
+CULTURAL RESPECT
+
+This project aims to honor the Taíno people and their traditions. It was designed to respectfully represent spiritual and cultural heritage.
+
+Explore the experience with curiosity and respect.
+
+============================================================
+
+AUTHOR
+Umberto Adrian Semeleer
+Bachelor in ICT & Media Design – Fontys University of Applied Sciences
+"In chaos, I find flow. In flow, I move forward."
+
+CONTACT
+
+Email: Umberto.a.semeleer@gmail.com
+
+LinkedIn: linkedin.com/in/umberto-semeleer-28964b240
+
+============================================================
+
+LICENSE
+MIT License – free for non-commercial, respectful use and adaptation.
+
