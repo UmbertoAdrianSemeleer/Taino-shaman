@@ -7,9 +7,33 @@ thinkingAudio.loop = true;
 thinkingAudio.volume = 0.6;
 
 let isRecording = false;
+let isBusy = false;  // ✅ Prevent repeated triggers
 let audioContext, analyser, dataArray, animationFrameId;
 let mediaRecorder, audioChunks = [];
 
+// === WebSocket for Arduino trigger ===
+const ws = new WebSocket("ws://localhost:8080");
+
+ws.onopen = () => console.log("WebSocket connected to Arduino");
+ws.onmessage = (event) => {
+  if (event.data === "trigger_voice") {
+    if (isBusy) {
+      console.log("Ignored: already processing");
+      return;
+    }
+
+    console.log("Arduino button pressed → startVoiceInput()");
+    isBusy = true;
+    startVoiceInput("arduino");
+
+    // Failsafe: auto-stop after 6 seconds if needed
+    setTimeout(() => {
+      if (isRecording) stopVoiceInput();
+    }, 6000);
+  }
+};
+
+// === Microphone setup ===
 async function setupMicStream() {
   const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
   setupMicVisualizer(stream);
@@ -21,6 +45,7 @@ async function setupMicStream() {
   mediaRecorder.start();
 }
 
+// === Orb animation ===
 function setupMicVisualizer(stream) {
   audioContext = new (window.AudioContext || window.webkitAudioContext)();
   const source = audioContext.createMediaStreamSource(stream);
@@ -45,6 +70,7 @@ function stopVisualizer() {
   orb.style.transform = 'scale(1)';
 }
 
+// === Handle stop and AI response ===
 async function handleRecordingStop() {
   stopVisualizer();
   orb.className = 'orb processing';
@@ -80,6 +106,7 @@ async function handleRecordingStop() {
     audioPlayer.onended = () => {
       orb.className = 'orb idle';
       statusText.textContent = 'Click or press a key to speak';
+      isBusy = false;  // ✅ Unlock after speaking
     };
   } catch (err) {
     thinkingAudio.pause();
@@ -87,9 +114,11 @@ async function handleRecordingStop() {
     console.error('[Error]', err);
     statusText.textContent = 'Error during processing.';
     orb.className = 'orb idle';
+    isBusy = false;  // ✅ Make sure it's unlocked on error
   }
 }
 
+// === Start voice recording ===
 async function startVoiceInput(source = "UI") {
   if (isRecording) return;
   isRecording = true;
@@ -103,6 +132,7 @@ async function startVoiceInput(source = "UI") {
     statusText.textContent = 'Mic access denied';
     orb.className = 'orb idle';
     isRecording = false;
+    isBusy = false;  // ✅ Unlock if failed to start
   }
 }
 
@@ -112,16 +142,27 @@ function stopVoiceInput() {
   mediaRecorder.stop();
 }
 
-// Input Events
-orb.addEventListener('mousedown', () => startVoiceInput("orb"));
+// === Input Events ===
+orb.addEventListener('mousedown', () => {
+  if (!isBusy) {
+    isBusy = true;
+    startVoiceInput("orb");
+  }
+});
 orb.addEventListener('mouseup', stopVoiceInput);
-orb.addEventListener('touchstart', () => startVoiceInput("touch"));
+orb.addEventListener('touchstart', () => {
+  if (!isBusy) {
+    isBusy = true;
+    startVoiceInput("touch");
+  }
+});
 orb.addEventListener('touchend', stopVoiceInput);
 
-// Keyboard
+// === Keyboard Events ===
 document.addEventListener('keydown', (e) => {
-  if ((e.key === 'Enter' || e.key === ' ') && !isRecording) {
+  if ((e.key === 'Enter' || e.key === ' ') && !isRecording && !isBusy) {
     e.preventDefault();
+    isBusy = true;
     startVoiceInput("keyboard");
   }
 });
