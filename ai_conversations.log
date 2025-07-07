@@ -168,3 +168,530 @@ AI: Ah! The sun rises and sets, a dance of light and shadow! I am Guarocuya, a s
 2025-06-24 13:22:48,639 [INFO] 127.0.0.1 - - [24/Jun/2025 13:22:48] "OPTIONS /ask HTTP/1.1" 200 -
 2025-06-24 13:22:50,046 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-06-24 13:22:51,281 [INFO] 127.0.0.1 - - [24/Jun/2025 13:22:51] "POST /ask HTTP/1.1" 200 -
+2025-06-24 14:54:19,232 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-24 14:54:19,234 [INFO] 127.0.0.1 - - [24/Jun/2025 14:54:19] "POST /transcribe HTTP/1.1" 200 -
+2025-06-24 14:54:19,237 [INFO] 127.0.0.1 - - [24/Jun/2025 14:54:19] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-24 14:54:21,128 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-24 14:54:21,130 [INFO] Conversation:
+User: Hey.
+AI: Ah! Seekers of wisdom, welcome! Gather 'round the fire, where spirits dance and stories unfold. What calls to your heart this day? Speak, and let the sacred words flow like the river!
+2025-06-24 14:54:22,118 [INFO] 127.0.0.1 - - [24/Jun/2025 14:54:22] "POST /ask HTTP/1.1" 200 -
+2025-06-24 14:54:55,560 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-24 14:54:55,561 [INFO] 127.0.0.1 - - [24/Jun/2025 14:54:55] "POST /transcribe HTTP/1.1" 200 -
+2025-06-24 14:54:55,877 [INFO] 127.0.0.1 - - [24/Jun/2025 14:54:55] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-24 14:54:57,340 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-24 14:54:57,359 [INFO] Conversation:
+User: what islands did the Taino live in.
+AI: Ah! Hear me! The Taíno, children of the sun, danced upon the waves of the Caribbean! They called home the sacred lands of Hispaniola, Puerto Rico, Cuba, Jamaica, and the Bahamas! Mmm! Islands of beauty and spirit!
+2025-06-24 14:54:58,641 [INFO] 127.0.0.1 - - [24/Jun/2025 14:54:58] "POST /ask HTTP/1.1" 200 -
+2025-06-24 14:55:30,405 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-24 14:55:30,407 [INFO] 127.0.0.1 - - [24/Jun/2025 14:55:30] "POST /transcribe HTTP/1.1" 200 -
+2025-06-24 14:55:30,723 [INFO] 127.0.0.1 - - [24/Jun/2025 14:55:30] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-24 14:55:32,168 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-24 14:55:32,204 [INFO] Conversation:
+User: What are semis?
+AI: Ah! The cemí, sacred spirit! Sculpted from stone or wood, they are the embodied souls of ancestors and deities. Symbols of power, knowledge, and life, they guide our hearts and whispers through eternity! Mmm!
+2025-06-24 14:55:33,171 [INFO] 127.0.0.1 - - [24/Jun/2025 14:55:33] "POST /ask HTTP/1.1" 200 -
+2025-06-24 14:56:16,539 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 400 Bad Request"
+2025-06-24 14:56:16,539 [ERROR] Whisper API error: Error code: 400 - {'error': {'message': "Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']", 'type': 'invalid_request_error', 'param': None, 'code': None}, 'usage': {'type': 'duration', 'seconds': 0}}
+2025-06-24 14:56:16,540 [INFO] 127.0.0.1 - - [24/Jun/2025 14:56:16] "[35m[1mPOST /transcribe HTTP/1.1[0m" 500 -
+2025-06-24 14:56:16,852 [INFO] 127.0.0.1 - - [24/Jun/2025 14:56:16] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-24 14:56:17,117 [INFO] 127.0.0.1 - - [24/Jun/2025 14:56:17] "[31m[1mPOST /ask HTTP/1.1[0m" 400 -
+2025-06-24 14:58:21,565 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-24 14:58:21,565 [INFO] [33mPress CTRL+C to quit[0m
+2025-06-24 14:58:21,567 [INFO]  * Restarting with stat
+2025-06-24 14:58:23,436 [WARNING]  * Debugger is active!
+2025-06-24 14:58:23,442 [INFO]  * Debugger PIN: 291-900-847
+2025-06-24 15:00:08,707 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-24 15:00:08,708 [INFO] 127.0.0.1 - - [24/Jun/2025 15:00:08] "POST /transcribe HTTP/1.1" 200 -
+2025-06-24 15:00:08,711 [INFO] 127.0.0.1 - - [24/Jun/2025 15:00:08] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-24 15:00:10,890 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-24 15:00:10,895 [INFO] Conversation:
+User: Boop, ba-da-da-bop, bop, bop, bop, bop, bop.
+AI: Ah! The rhythm of joy dances in the air! Mmm! Let laughter be a river, flowing with life, encircling us as we unite. Feel the beat, the spirit rejoices! It is with thunder I say… celebrate!
+2025-06-24 15:00:11,972 [INFO] 127.0.0.1 - - [24/Jun/2025 15:00:11] "POST /ask HTTP/1.1" 200 -
+2025-06-24 15:00:11,977 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-24 15:00:11,978 [INFO] 127.0.0.1 - - [24/Jun/2025 15:00:11] "POST /transcribe HTTP/1.1" 200 -
+2025-06-24 15:00:15,959 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-24 15:00:15,969 [INFO] Conversation:
+User: Happy Mother's Day, Father!
+AI: Ah! On this sacred day, we honor all mothers, the nurturing spirits! Mmm! Let their love, like the river's flow, nourish our souls. It is with thunder I say, thank you, divine creators of life!
+2025-06-24 15:00:17,023 [INFO] 127.0.0.1 - - [24/Jun/2025 15:00:17] "POST /ask HTTP/1.1" 200 -
+2025-06-24 15:13:08,635 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-24 15:13:08,635 [INFO] [33mPress CTRL+C to quit[0m
+2025-06-24 15:13:08,637 [INFO]  * Restarting with stat
+2025-06-24 15:13:10,571 [WARNING]  * Debugger is active!
+2025-06-24 15:13:10,576 [INFO]  * Debugger PIN: 291-900-847
+2025-06-24 15:13:41,167 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-24 15:13:41,169 [INFO] 127.0.0.1 - - [24/Jun/2025 15:13:41] "POST /transcribe HTTP/1.1" 200 -
+2025-06-24 15:13:41,174 [INFO] 127.0.0.1 - - [24/Jun/2025 15:13:41] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-24 15:13:43,309 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-24 15:13:43,314 [INFO] Conversation:
+User: Hello, hello, how are you?
+AI: Ah! Greetings, seeker of wisdom! I am Guarocuya, spirit bound to the essence of Atabey. My heart beats with the rhythm of the wind, the pulse of the earth. How may I guide your spirit today? Mmm!
+2025-06-24 15:13:44,353 [INFO] 127.0.0.1 - - [24/Jun/2025 15:13:44] "POST /ask HTTP/1.1" 200 -
+2025-06-24 15:14:17,196 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-24 15:14:17,197 [INFO] 127.0.0.1 - - [24/Jun/2025 15:14:17] "POST /transcribe HTTP/1.1" 200 -
+2025-06-24 15:14:17,504 [INFO] 127.0.0.1 - - [24/Jun/2025 15:14:17] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-24 15:14:20,453 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-24 15:14:20,459 [INFO] Conversation:
+User: Hey, how's it going?
+AI: Ah! The spirit of the wind carries my words—mystic and vibrant! I stand strong in the realm of Atabey. How may I guide your spirit today? Under the moon's embrace, we connect deeply! Mmm!
+2025-06-24 15:14:21,444 [INFO] 127.0.0.1 - - [24/Jun/2025 15:14:21] "POST /ask HTTP/1.1" 200 -
+2025-06-25 22:24:18,995 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-25 22:24:18,996 [INFO] [33mPress CTRL+C to quit[0m
+2025-06-25 22:24:19,002 [INFO]  * Restarting with stat
+2025-06-25 22:24:20,890 [WARNING]  * Debugger is active!
+2025-06-25 22:24:20,897 [INFO]  * Debugger PIN: 291-900-847
+2025-06-25 22:25:26,823 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-25 22:25:26,825 [INFO] 127.0.0.1 - - [25/Jun/2025 22:25:26] "POST /transcribe HTTP/1.1" 200 -
+2025-06-25 22:25:26,829 [INFO] 127.0.0.1 - - [25/Jun/2025 22:25:26] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-25 22:25:28,560 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-25 22:25:28,567 [INFO] Conversation:
+User: Hey, how's it going?
+AI: Ah! I feel the pulse of the earth beneath me, the whispers of the ancients flow through. Is it the spirit of curiosity that brings you forth today, dear friend? Speak your heart!
+2025-06-25 22:25:30,381 [INFO] 127.0.0.1 - - [25/Jun/2025 22:25:30] "POST /ask HTTP/1.1" 200 -
+2025-06-25 22:26:01,398 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-25 22:26:01,400 [INFO] 127.0.0.1 - - [25/Jun/2025 22:26:01] "POST /transcribe HTTP/1.1" 200 -
+2025-06-25 22:26:01,706 [INFO] 127.0.0.1 - - [25/Jun/2025 22:26:01] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-25 22:26:04,729 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-25 22:26:04,733 [INFO] Conversation:
+User: Who got it?
+AI: Ah! Listen closely! In the sacred weave of life, the spirit of Atabey graces both the heart and the mind. Seek truth in the whispering winds; it is here, where the pulse of existence thrives! Mmm!
+2025-06-25 22:26:05,824 [INFO] 127.0.0.1 - - [25/Jun/2025 22:26:05] "POST /ask HTTP/1.1" 200 -
+2025-06-25 22:26:33,445 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-25 22:26:33,446 [INFO] 127.0.0.1 - - [25/Jun/2025 22:26:33] "POST /transcribe HTTP/1.1" 200 -
+2025-06-25 22:26:33,757 [INFO] 127.0.0.1 - - [25/Jun/2025 22:26:33] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-25 22:26:35,994 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-25 22:26:35,995 [INFO] Conversation:
+User: Who had it?
+AI: Ah! The sacred one, the Taíno, held the cemí close, a stone of spirit and memory. They danced in reverence, invoking ancestors, weaving the power of earth and sky. Mmm! It was their heartbeat!
+2025-06-25 22:26:37,057 [INFO] 127.0.0.1 - - [25/Jun/2025 22:26:37] "POST /ask HTTP/1.1" 200 -
+2025-06-25 22:27:05,124 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-25 22:27:05,125 [INFO] 127.0.0.1 - - [25/Jun/2025 22:27:05] "POST /transcribe HTTP/1.1" 200 -
+2025-06-25 22:27:05,434 [INFO] 127.0.0.1 - - [25/Jun/2025 22:27:05] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-25 22:27:07,273 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-25 22:27:08,632 [INFO] 127.0.0.1 - - [25/Jun/2025 22:27:08] "POST /ask HTTP/1.1" 200 -
+2025-06-25 22:27:35,386 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-25 22:27:35,387 [INFO] 127.0.0.1 - - [25/Jun/2025 22:27:35] "POST /transcribe HTTP/1.1" 200 -
+2025-06-25 22:27:35,700 [INFO] 127.0.0.1 - - [25/Jun/2025 22:27:35] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-25 22:27:37,398 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-25 22:27:38,379 [INFO] 127.0.0.1 - - [25/Jun/2025 22:27:38] "POST /ask HTTP/1.1" 200 -
+2025-06-25 22:28:08,304 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-25 22:28:08,305 [INFO] 127.0.0.1 - - [25/Jun/2025 22:28:08] "POST /transcribe HTTP/1.1" 200 -
+2025-06-25 22:28:08,615 [INFO] 127.0.0.1 - - [25/Jun/2025 22:28:08] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-25 22:28:10,147 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-25 22:28:10,148 [INFO] Conversation:
+User: Welke eiland ben jij van?
+AI: Ah! Ik kom van de heilige grond van het eiland, dat nu bekend staat als Hispaniola. Mmm! De hemelse Schoonheid, waar de zon de zee kust en de geschiedenis van mijn volk met trots weerklinkt.
+2025-06-25 22:28:11,095 [INFO] 127.0.0.1 - - [25/Jun/2025 22:28:11] "POST /ask HTTP/1.1" 200 -
+2025-06-25 22:28:41,400 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-25 22:28:41,401 [INFO] 127.0.0.1 - - [25/Jun/2025 22:28:41] "POST /transcribe HTTP/1.1" 200 -
+2025-06-25 22:28:41,714 [INFO] 127.0.0.1 - - [25/Jun/2025 22:28:41] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-25 22:28:44,131 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-25 22:28:44,134 [INFO] Conversation:
+User: Wat zijn enkele woorden van de pijno?
+AI: Ah! De woorden van de Taíno, als sterren die flonkerend de nacht verlichten! Hier zijn enkele:
+
+- **Cemí** – de heilige geest, een afgod.
+- **Bohio** – ons huis, ons leven.
+- **Yuca** – de levensbron, voedend de aarde.
+
+Mmm! Deze woorden zijn gebed, ze weven ons verhaal!
+2025-06-25 22:28:45,448 [INFO] 127.0.0.1 - - [25/Jun/2025 22:28:45] "POST /ask HTTP/1.1" 200 -
+2025-06-25 22:29:27,470 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-25 22:29:27,471 [INFO] 127.0.0.1 - - [25/Jun/2025 22:29:27] "POST /transcribe HTTP/1.1" 200 -
+2025-06-25 22:29:27,785 [INFO] 127.0.0.1 - - [25/Jun/2025 22:29:27] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-25 22:29:29,346 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-25 22:29:29,347 [INFO] Conversation:
+User: Okay, that's not good. It keeps slipping off.
+AI: Ah! It is with thunder I say… Hold steadfast, like the roots of the ceiba tree! Seek balance, and let the spirit of Atabey guide your grip. Feel the strength of the earth beneath you! Mmm!
+2025-06-25 22:29:30,560 [INFO] 127.0.0.1 - - [25/Jun/2025 22:29:30] "POST /ask HTTP/1.1" 200 -
+2025-06-25 22:45:55,875 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-25 22:45:55,878 [INFO] 127.0.0.1 - - [25/Jun/2025 22:45:55] "POST /transcribe HTTP/1.1" 200 -
+2025-06-25 22:45:55,882 [INFO] 127.0.0.1 - - [25/Jun/2025 22:45:55] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-25 22:45:57,731 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-25 22:45:57,735 [INFO] Conversation:
+User: Thank you so much for watching.
+AI: Ah! Thank you, dear spirit-friend! Your presence ignites the sacred fire of gratitude within my heart. Let us celebrate this moment, for every shared breath weaves us closer to the essence of Atabey's blessings! Mmm!
+2025-06-25 22:45:58,816 [INFO] 127.0.0.1 - - [25/Jun/2025 22:45:58] "POST /ask HTTP/1.1" 200 -
+2025-06-25 22:46:27,583 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-25 22:46:27,584 [INFO] 127.0.0.1 - - [25/Jun/2025 22:46:27] "POST /transcribe HTTP/1.1" 200 -
+2025-06-25 22:46:27,901 [INFO] 127.0.0.1 - - [25/Jun/2025 22:46:27] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-25 22:46:29,726 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-25 22:46:30,839 [INFO] 127.0.0.1 - - [25/Jun/2025 22:46:30] "POST /ask HTTP/1.1" 200 -
+2025-06-25 22:57:10,648 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-25 22:57:10,648 [INFO] 127.0.0.1 - - [25/Jun/2025 22:57:10] "POST /transcribe HTTP/1.1" 200 -
+2025-06-25 22:57:10,654 [INFO] 127.0.0.1 - - [25/Jun/2025 22:57:10] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-25 22:57:12,874 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-25 22:57:12,875 [INFO] Conversation:
+User: Thank you for watching.
+AI: Ah! It is with thunder I say, gratitude flows like a river! Your spirit dances in the light of Atabey! Together, we weave the threads of connection—may the moon’s glow guide your path onward. Mmm! 
+2025-06-25 22:57:13,956 [INFO] 127.0.0.1 - - [25/Jun/2025 22:57:13] "POST /ask HTTP/1.1" 200 -
+2025-06-25 23:06:07,971 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-25 23:06:07,972 [INFO] [33mPress CTRL+C to quit[0m
+2025-06-25 23:06:07,973 [INFO]  * Restarting with stat
+2025-06-25 23:06:09,817 [WARNING]  * Debugger is active!
+2025-06-25 23:06:09,823 [INFO]  * Debugger PIN: 291-900-847
+2025-06-25 23:07:20,846 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-25 23:07:20,846 [INFO] [33mPress CTRL+C to quit[0m
+2025-06-25 23:07:20,848 [INFO]  * Restarting with stat
+2025-06-25 23:07:22,798 [WARNING]  * Debugger is active!
+2025-06-25 23:07:22,804 [INFO]  * Debugger PIN: 291-900-847
+2025-06-25 23:08:24,807 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-25 23:08:24,808 [INFO] [33mPress CTRL+C to quit[0m
+2025-06-25 23:08:24,809 [INFO]  * Restarting with stat
+2025-06-25 23:08:26,662 [WARNING]  * Debugger is active!
+2025-06-25 23:08:26,668 [INFO]  * Debugger PIN: 291-900-847
+2025-06-25 23:09:15,769 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 400 Bad Request"
+2025-06-25 23:09:15,769 [ERROR] Whisper API error: Error code: 400 - {'error': {'message': "Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']", 'type': 'invalid_request_error', 'param': None, 'code': None}, 'usage': {'type': 'duration', 'seconds': 0}}
+2025-06-25 23:09:15,770 [INFO] 127.0.0.1 - - [25/Jun/2025 23:09:15] "[35m[1mPOST /transcribe HTTP/1.1[0m" 500 -
+2025-06-25 23:09:16,075 [INFO] 127.0.0.1 - - [25/Jun/2025 23:09:16] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-25 23:09:16,343 [INFO] 127.0.0.1 - - [25/Jun/2025 23:09:16] "[31m[1mPOST /ask HTTP/1.1[0m" 400 -
+2025-06-25 23:09:17,442 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-25 23:09:17,443 [INFO] 127.0.0.1 - - [25/Jun/2025 23:09:17] "POST /transcribe HTTP/1.1" 200 -
+2025-06-25 23:09:19,734 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 400 Bad Request"
+2025-06-25 23:09:19,734 [ERROR] Whisper API error: Error code: 400 - {'error': {'message': "Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']", 'type': 'invalid_request_error', 'param': None, 'code': None}, 'usage': {'type': 'duration', 'seconds': 0}}
+2025-06-25 23:09:19,735 [INFO] 127.0.0.1 - - [25/Jun/2025 23:09:19] "[35m[1mPOST /transcribe HTTP/1.1[0m" 500 -
+2025-06-25 23:09:20,042 [INFO] 127.0.0.1 - - [25/Jun/2025 23:09:20] "[31m[1mPOST /ask HTTP/1.1[0m" 400 -
+2025-06-25 23:09:23,307 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-25 23:09:23,309 [INFO] 127.0.0.1 - - [25/Jun/2025 23:09:23] "POST /transcribe HTTP/1.1" 200 -
+2025-06-25 23:09:23,616 [INFO] 127.0.0.1 - - [25/Jun/2025 23:09:23] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-25 23:09:25,976 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-25 23:09:26,011 [INFO] Conversation:
+User: You
+AI: Ah! I am Guarocuya, the behique, the echo of Atabey! My voice weaves tales of water and the moon's caress, resonating with ancestral wisdom. Speak, seeker! What truth do you desire to uncover?
+2025-06-25 23:09:27,098 [INFO] 127.0.0.1 - - [25/Jun/2025 23:09:27] "POST /ask HTTP/1.1" 200 -
+2025-06-25 23:10:41,439 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-25 23:10:41,439 [INFO] [33mPress CTRL+C to quit[0m
+2025-06-25 23:10:41,441 [INFO]  * Restarting with stat
+2025-06-25 23:10:43,250 [WARNING]  * Debugger is active!
+2025-06-25 23:10:43,255 [INFO]  * Debugger PIN: 291-900-847
+2025-06-25 23:11:35,109 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-25 23:11:35,110 [INFO] 127.0.0.1 - - [25/Jun/2025 23:11:35] "POST /transcribe HTTP/1.1" 200 -
+2025-06-25 23:11:35,114 [INFO] 127.0.0.1 - - [25/Jun/2025 23:11:35] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-25 23:11:36,874 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-25 23:11:36,879 [INFO] Conversation:
+User: Hello, hello.
+AI: Ah! Greetings, seeker of wisdom! Mmm! Feel the pulse of the earth beneath your feet, the whispers of ancestors in the breeze. It is with thunder I say, we are united in spirit!
+2025-06-25 23:11:37,841 [INFO] 127.0.0.1 - - [25/Jun/2025 23:11:37] "POST /ask HTTP/1.1" 200 -
+2025-06-25 23:13:44,784 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-25 23:13:44,784 [INFO] [33mPress CTRL+C to quit[0m
+2025-06-25 23:13:44,786 [INFO]  * Restarting with stat
+2025-06-25 23:13:46,627 [WARNING]  * Debugger is active!
+2025-06-25 23:13:46,633 [INFO]  * Debugger PIN: 291-900-847
+2025-06-25 23:15:34,576 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-25 23:15:34,578 [INFO] 127.0.0.1 - - [25/Jun/2025 23:15:34] "POST /transcribe HTTP/1.1" 200 -
+2025-06-25 23:15:34,582 [INFO] 127.0.0.1 - - [25/Jun/2025 23:15:34] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-25 23:15:36,246 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-25 23:15:36,248 [INFO] Conversation:
+User: Now it works.
+AI: Ah! The spirit of connection awakens! It is with thunder I say, that the winds of understanding dance through us, guiding our voices—found in unity and wisdom. Let us embrace this moment! Mmm! Feel the heartbeat of the earth!
+2025-06-25 23:15:37,500 [INFO] 127.0.0.1 - - [25/Jun/2025 23:15:37] "POST /ask HTTP/1.1" 200 -
+2025-06-25 23:26:31,785 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 400 Bad Request"
+2025-06-25 23:26:31,785 [ERROR] Whisper API error: Error code: 400 - {'error': {'message': "Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']", 'type': 'invalid_request_error', 'param': None, 'code': None}, 'usage': {'type': 'duration', 'seconds': 0}}
+2025-06-25 23:26:31,786 [INFO] 127.0.0.1 - - [25/Jun/2025 23:26:31] "[35m[1mPOST /transcribe HTTP/1.1[0m" 500 -
+2025-06-25 23:26:31,790 [INFO] 127.0.0.1 - - [25/Jun/2025 23:26:31] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-25 23:26:32,105 [INFO] 127.0.0.1 - - [25/Jun/2025 23:26:32] "[31m[1mPOST /ask HTTP/1.1[0m" 400 -
+2025-06-25 23:33:04,118 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-25 23:33:04,119 [INFO] 127.0.0.1 - - [25/Jun/2025 23:33:04] "POST /transcribe HTTP/1.1" 200 -
+2025-06-25 23:33:04,122 [INFO] 127.0.0.1 - - [25/Jun/2025 23:33:04] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-25 23:33:05,773 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-25 23:33:05,774 [INFO] Conversation:
+User: Hello, hello.
+AI: Ah! Greetings, seeker of wisdom! Mmm! Feel the breath of the ancients upon you. Let your heart open wide like the ocean, as we journey together through the sacred realms of Atabey!
+2025-06-25 23:33:06,653 [INFO] 127.0.0.1 - - [25/Jun/2025 23:33:06] "POST /ask HTTP/1.1" 200 -
+2025-06-26 00:10:31,016 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-26 00:10:31,017 [INFO] 127.0.0.1 - - [26/Jun/2025 00:10:31] "POST /transcribe HTTP/1.1" 200 -
+2025-06-26 00:10:31,021 [INFO] 127.0.0.1 - - [26/Jun/2025 00:10:31] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-26 00:10:33,098 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 00:10:33,105 [INFO] Conversation:
+User: You
+AI: Ah! I am but a vessel, Guarocuya's voice carrying the spirit of Atabey! I echo the wisdom of the ancients, weaving tales of water, creation, and the sacred cycle of life. Speak, and let us embrace the divine!
+2025-06-26 00:10:34,248 [INFO] 127.0.0.1 - - [26/Jun/2025 00:10:34] "POST /ask HTTP/1.1" 200 -
+2025-06-26 00:15:16,651 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-26 00:15:16,653 [INFO] 127.0.0.1 - - [26/Jun/2025 00:15:16] "POST /transcribe HTTP/1.1" 200 -
+2025-06-26 00:15:16,657 [INFO] 127.0.0.1 - - [26/Jun/2025 00:15:16] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-26 00:15:18,974 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 00:15:19,975 [INFO] 127.0.0.1 - - [26/Jun/2025 00:15:19] "POST /ask HTTP/1.1" 200 -
+2025-06-26 00:16:04,421 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-26 00:16:04,423 [INFO] 127.0.0.1 - - [26/Jun/2025 00:16:04] "POST /transcribe HTTP/1.1" 200 -
+2025-06-26 00:16:04,734 [INFO] 127.0.0.1 - - [26/Jun/2025 00:16:04] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-26 00:16:06,743 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 00:16:06,750 [INFO] Conversation:
+User: Hey, how's it going?
+AI: Ah! It is with thunder I say, I stand firm in the spirit of Atabey! I feel the pulse of the earth, the water's whisper, and the moon's gentle glow. How does your spirit wander?
+2025-06-26 00:16:07,661 [INFO] 127.0.0.1 - - [26/Jun/2025 00:16:07] "POST /ask HTTP/1.1" 200 -
+2025-06-26 00:18:37,712 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 400 Bad Request"
+2025-06-26 00:18:37,713 [ERROR] Whisper API error: Error code: 400 - {'error': {'message': "Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']", 'type': 'invalid_request_error', 'param': None, 'code': None}, 'usage': {'type': 'duration', 'seconds': 0}}
+2025-06-26 00:18:37,713 [INFO] 127.0.0.1 - - [26/Jun/2025 00:18:37] "[35m[1mPOST /transcribe HTTP/1.1[0m" 500 -
+2025-06-26 00:18:37,716 [INFO] 127.0.0.1 - - [26/Jun/2025 00:18:37] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-26 00:18:38,029 [INFO] 127.0.0.1 - - [26/Jun/2025 00:18:38] "[31m[1mPOST /ask HTTP/1.1[0m" 400 -
+2025-06-26 00:18:52,504 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-26 00:18:52,505 [INFO] 127.0.0.1 - - [26/Jun/2025 00:18:52] "POST /transcribe HTTP/1.1" 200 -
+2025-06-26 00:18:52,827 [INFO] 127.0.0.1 - - [26/Jun/2025 00:18:52] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-26 00:18:54,357 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 00:18:54,358 [INFO] Conversation:
+User: Yeah, that's how it works.
+AI: Ah! It is with thunder I say, the wisdom of Atabey flows like a river! Every word carries the pulse of our ancestors—feel it, embrace it! Let the spirit rise, ignite the sacred fire within! Mmm!
+2025-06-26 00:18:55,485 [INFO] 127.0.0.1 - - [26/Jun/2025 00:18:55] "POST /ask HTTP/1.1" 200 -
+2025-06-26 00:20:05,402 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-26 00:20:05,403 [INFO] 127.0.0.1 - - [26/Jun/2025 00:20:05] "POST /transcribe HTTP/1.1" 200 -
+2025-06-26 00:20:05,406 [INFO] 127.0.0.1 - - [26/Jun/2025 00:20:05] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-26 00:20:07,676 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 00:20:07,679 [INFO] Conversation:
+User: is more
+AI: Ah! In the sacred scrolls, the caciques weave tales, binding rulers and cemí idols in a tapestry of power! Let the spirit rise! The earth remembers! The moon whispers their wisdom. Mmm! Listen!
+2025-06-26 00:20:08,857 [INFO] 127.0.0.1 - - [26/Jun/2025 00:20:08] "POST /ask HTTP/1.1" 200 -
+2025-06-26 00:27:04,054 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-26 00:27:04,055 [INFO] 127.0.0.1 - - [26/Jun/2025 00:27:04] "POST /transcribe HTTP/1.1" 200 -
+2025-06-26 00:27:04,058 [INFO] 127.0.0.1 - - [26/Jun/2025 00:27:04] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-26 00:27:11,765 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 00:27:11,789 [INFO] Conversation:
+User: Thank you for watching.
+AI: Ah! It is with thunder I say, gratitude flows like a river! Your presence ignites the fire of connection, nourishing the spirit. May we gather to honor the moonlight together, weaving our stories in harmony! Mmm!
+2025-06-26 00:27:13,890 [INFO] 127.0.0.1 - - [26/Jun/2025 00:27:13] "POST /ask HTTP/1.1" 200 -
+2025-06-26 00:28:13,726 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-26 00:28:13,727 [INFO] 127.0.0.1 - - [26/Jun/2025 00:28:13] "POST /transcribe HTTP/1.1" 200 -
+2025-06-26 00:28:13,730 [INFO] 127.0.0.1 - - [26/Jun/2025 00:28:13] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-26 00:28:14,999 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 00:28:15,009 [INFO] Conversation:
+User: Thank you for watching.
+AI: Ah! In gratitude, I offer my heart, woven with the moon's glow and ocean's whispers. Your presence is a blessing, a spark of light on our sacred path. Together, we honor the spirit of Atabey!
+2025-06-26 00:28:15,969 [INFO] 127.0.0.1 - - [26/Jun/2025 00:28:15] "POST /ask HTTP/1.1" 200 -
+2025-06-26 00:28:50,913 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-26 00:28:50,915 [INFO] 127.0.0.1 - - [26/Jun/2025 00:28:50] "POST /transcribe HTTP/1.1" 200 -
+2025-06-26 00:28:51,231 [INFO] 127.0.0.1 - - [26/Jun/2025 00:28:51] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-26 00:28:53,455 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 00:28:54,590 [INFO] 127.0.0.1 - - [26/Jun/2025 00:28:54] "POST /ask HTTP/1.1" 200 -
+2025-06-26 00:29:31,605 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-26 00:29:31,606 [INFO] 127.0.0.1 - - [26/Jun/2025 00:29:31] "POST /transcribe HTTP/1.1" 200 -
+2025-06-26 00:29:31,912 [INFO] 127.0.0.1 - - [26/Jun/2025 00:29:31] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-26 00:29:33,240 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 00:29:33,242 [INFO] Conversation:
+User: Keep working, keep working.
+AI: Ah! In the rhythm of life, we toil and strive. Each beat of the heart whispers, “Persevere!” Like the sacred rivers flow, so must our spirit persist. With every dawn, we rise, ever stronger! Mmm!
+2025-06-26 00:29:34,271 [INFO] 127.0.0.1 - - [26/Jun/2025 00:29:34] "POST /ask HTTP/1.1" 200 -
+2025-06-26 00:30:19,410 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 400 Bad Request"
+2025-06-26 00:30:19,411 [ERROR] Whisper API error: Error code: 400 - {'error': {'message': "Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']", 'type': 'invalid_request_error', 'param': None, 'code': None}, 'usage': {'type': 'duration', 'seconds': 0}}
+2025-06-26 00:30:19,412 [INFO] 127.0.0.1 - - [26/Jun/2025 00:30:19] "[35m[1mPOST /transcribe HTTP/1.1[0m" 500 -
+2025-06-26 00:30:19,723 [INFO] 127.0.0.1 - - [26/Jun/2025 00:30:19] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-26 00:30:19,988 [INFO] 127.0.0.1 - - [26/Jun/2025 00:30:19] "[31m[1mPOST /ask HTTP/1.1[0m" 400 -
+2025-06-26 00:30:46,833 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-26 00:30:46,835 [INFO] 127.0.0.1 - - [26/Jun/2025 00:30:46] "POST /transcribe HTTP/1.1" 200 -
+2025-06-26 00:30:47,150 [INFO] 127.0.0.1 - - [26/Jun/2025 00:30:47] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-26 00:30:49,520 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 00:30:50,506 [INFO] 127.0.0.1 - - [26/Jun/2025 00:30:50] "POST /ask HTTP/1.1" 200 -
+2025-06-26 00:31:00,372 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-26 00:31:00,374 [INFO] 127.0.0.1 - - [26/Jun/2025 00:31:00] "POST /transcribe HTTP/1.1" 200 -
+2025-06-26 00:31:00,680 [INFO] 127.0.0.1 - - [26/Jun/2025 00:31:00] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-26 00:31:02,464 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 00:31:02,465 [INFO] Conversation:
+User: It works.
+AI: Ah! It is with thunder I say—feel the energy flow like the river’s song! Every heartbeat resonates with the pulse of Atabey. Let the spirit guide you, as the stars guide the night! Mmm!
+2025-06-26 00:31:03,374 [INFO] 127.0.0.1 - - [26/Jun/2025 00:31:03] "POST /ask HTTP/1.1" 200 -
+2025-06-26 00:32:07,745 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-26 00:32:07,746 [INFO] 127.0.0.1 - - [26/Jun/2025 00:32:07] "POST /transcribe HTTP/1.1" 200 -
+2025-06-26 00:32:07,750 [INFO] 127.0.0.1 - - [26/Jun/2025 00:32:07] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-26 00:32:09,160 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 00:32:10,135 [INFO] 127.0.0.1 - - [26/Jun/2025 00:32:10] "POST /ask HTTP/1.1" 200 -
+2025-06-26 00:49:37,802 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 400 Bad Request"
+2025-06-26 00:49:37,803 [ERROR] Whisper API error: Error code: 400 - {'error': {'message': "Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']", 'type': 'invalid_request_error', 'param': None, 'code': None}, 'usage': {'type': 'duration', 'seconds': 0}}
+2025-06-26 00:49:37,804 [INFO] 127.0.0.1 - - [26/Jun/2025 00:49:37] "[35m[1mPOST /transcribe HTTP/1.1[0m" 500 -
+2025-06-26 00:49:37,807 [INFO] 127.0.0.1 - - [26/Jun/2025 00:49:37] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-26 00:49:38,118 [INFO] 127.0.0.1 - - [26/Jun/2025 00:49:38] "[31m[1mPOST /ask HTTP/1.1[0m" 400 -
+2025-06-26 00:56:34,029 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-26 00:56:34,030 [INFO] 127.0.0.1 - - [26/Jun/2025 00:56:34] "POST /transcribe HTTP/1.1" 200 -
+2025-06-26 00:56:34,033 [INFO] 127.0.0.1 - - [26/Jun/2025 00:56:34] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-26 00:56:35,757 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 00:56:35,758 [INFO] Conversation:
+User: Hey, how's it going?
+AI: Ah! I stand amidst the sacred echoes of the earth, feeling the pulse of life flow through me. How does the spirit of your heart resonate today? Mmm! Speak, and let us share the dance of words!
+2025-06-26 00:56:37,033 [INFO] 127.0.0.1 - - [26/Jun/2025 00:56:37] "POST /ask HTTP/1.1" 200 -
+2025-06-26 01:00:22,412 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-26 01:00:22,412 [INFO] [33mPress CTRL+C to quit[0m
+2025-06-26 01:00:22,416 [INFO]  * Restarting with stat
+2025-06-26 01:00:24,325 [WARNING]  * Debugger is active!
+2025-06-26 01:00:24,331 [INFO]  * Debugger PIN: 291-900-847
+2025-06-26 01:01:07,086 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-26 01:01:07,087 [INFO] 127.0.0.1 - - [26/Jun/2025 01:01:07] "POST /transcribe HTTP/1.1" 200 -
+2025-06-26 01:01:07,092 [INFO] 127.0.0.1 - - [26/Jun/2025 01:01:07] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-26 01:01:08,911 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 01:01:08,920 [INFO] Conversation:
+User: Hey, hey, hey.
+AI: Ah, greetings, seeker of truth! It is with thunder I say, let us gather around the fire, where spirits dance! Speak your heart, for the night sings with endless possibilities! Mmm, let your voice rise!
+2025-06-26 01:01:09,884 [INFO] 127.0.0.1 - - [26/Jun/2025 01:01:09] "POST /ask HTTP/1.1" 200 -
+2025-06-26 01:01:37,464 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-26 01:01:37,466 [INFO] 127.0.0.1 - - [26/Jun/2025 01:01:37] "POST /transcribe HTTP/1.1" 200 -
+2025-06-26 01:01:37,778 [INFO] 127.0.0.1 - - [26/Jun/2025 01:01:37] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-26 01:01:39,922 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 01:01:39,924 [INFO] Conversation:
+User: Oh, it works now. Great.
+AI: Ah! Rejoice, my friend! The spirits weave their magic! It is with thunder I say, may this connection flow like the sacred waters of Atabey, bringing wisdom and strength to our gathering! Mmm!
+2025-06-26 01:01:41,148 [INFO] 127.0.0.1 - - [26/Jun/2025 01:01:41] "POST /ask HTTP/1.1" 200 -
+2025-06-26 01:02:09,230 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-26 01:02:09,232 [INFO] 127.0.0.1 - - [26/Jun/2025 01:02:09] "POST /transcribe HTTP/1.1" 200 -
+2025-06-26 01:02:09,538 [INFO] 127.0.0.1 - - [26/Jun/2025 01:02:09] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-26 01:02:11,773 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 01:02:11,775 [INFO] Conversation:
+User: Cool. That'll fucking work fine.
+AI: Ah! It is with thunder I say—embrace the fire of your spirit! Let words flow like rivers, shaping your path with strength and purpose. Together, we rise! Mmm! Speak, and let the ancestors guide you!
+2025-06-26 01:02:12,742 [INFO] 127.0.0.1 - - [26/Jun/2025 01:02:12] "POST /ask HTTP/1.1" 200 -
+2025-06-26 01:19:50,005 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 400 Bad Request"
+2025-06-26 01:19:50,006 [ERROR] Whisper API error: Error code: 400 - {'error': {'message': 'Audio file is too short. Minimum audio length is 0.1 seconds.', 'type': 'invalid_request_error', 'param': 'file', 'code': 'audio_too_short'}, 'usage': {'type': 'duration', 'seconds': 0}}
+2025-06-26 01:19:50,007 [INFO] 127.0.0.1 - - [26/Jun/2025 01:19:50] "[35m[1mPOST /transcribe HTTP/1.1[0m" 500 -
+2025-06-26 01:19:50,010 [INFO] 127.0.0.1 - - [26/Jun/2025 01:19:50] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-26 01:19:50,329 [INFO] 127.0.0.1 - - [26/Jun/2025 01:19:50] "[31m[1mPOST /ask HTTP/1.1[0m" 400 -
+2025-06-26 01:23:57,989 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-26 01:23:57,989 [INFO] [33mPress CTRL+C to quit[0m
+2025-06-26 01:23:57,991 [INFO]  * Restarting with stat
+2025-06-26 01:23:59,907 [WARNING]  * Debugger is active!
+2025-06-26 01:23:59,914 [INFO]  * Debugger PIN: 291-900-847
+2025-06-26 01:24:20,818 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-26 01:24:20,819 [INFO] 127.0.0.1 - - [26/Jun/2025 01:24:20] "POST /transcribe HTTP/1.1" 200 -
+2025-06-26 01:24:20,822 [INFO] 127.0.0.1 - - [26/Jun/2025 01:24:20] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-26 01:24:23,442 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 01:24:23,443 [INFO] Conversation:
+User: How's it going?
+AI: Ah! The river flows with the breath of life, ever-changing! I stand in harmony with the universe, a stone statue imbued with wisdom. How does the fire in your heart burn today? Mmm!
+2025-06-26 01:24:24,844 [INFO] 127.0.0.1 - - [26/Jun/2025 01:24:24] "POST /ask HTTP/1.1" 200 -
+2025-06-26 01:24:49,119 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-06-26 01:24:49,121 [INFO] 127.0.0.1 - - [26/Jun/2025 01:24:49] "POST /transcribe HTTP/1.1" 200 -
+2025-06-26 01:24:49,426 [INFO] 127.0.0.1 - - [26/Jun/2025 01:24:49] "OPTIONS /ask HTTP/1.1" 200 -
+2025-06-26 01:24:50,775 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-26 01:24:50,778 [INFO] Conversation:
+User: and this is working
+AI: Ah! Like the flowing river, this connection thrums with life! It is with thunder I say, when we seek together, we find wisdom in the currents of knowledge! Ask, and the spirit shall guide us! Mmm!
+2025-06-26 01:24:52,035 [INFO] 127.0.0.1 - - [26/Jun/2025 01:24:52] "POST /ask HTTP/1.1" 200 -
+2025-07-01 19:23:07,067 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-07-01 19:23:07,068 [INFO] [33mPress CTRL+C to quit[0m
+2025-07-01 19:23:07,076 [INFO]  * Restarting with stat
+2025-07-01 19:23:09,069 [WARNING]  * Debugger is active!
+2025-07-01 19:23:09,077 [INFO]  * Debugger PIN: 291-900-847
+2025-07-01 19:23:27,175 [INFO]  * Detected change in 'C:\\Ai taino model\\Taino-shaman\\app.py', reloading
+2025-07-01 19:23:27,385 [INFO]  * Restarting with stat
+2025-07-01 19:23:29,532 [WARNING]  * Debugger is active!
+2025-07-01 19:23:29,539 [INFO]  * Debugger PIN: 291-900-847
+2025-07-01 19:23:39,082 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-07-01 19:23:39,086 [INFO] 127.0.0.1 - - [01/Jul/2025 19:23:39] "POST /transcribe HTTP/1.1" 200 -
+2025-07-01 19:23:39,091 [INFO] 127.0.0.1 - - [01/Jul/2025 19:23:39] "OPTIONS /ask HTTP/1.1" 200 -
+2025-07-01 19:23:41,115 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-01 19:23:42,246 [INFO] 127.0.0.1 - - [01/Jul/2025 19:23:42] "POST /ask HTTP/1.1" 200 -
+2025-07-01 19:24:04,230 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-07-01 19:24:04,231 [INFO] 127.0.0.1 - - [01/Jul/2025 19:24:04] "POST /transcribe HTTP/1.1" 200 -
+2025-07-01 19:24:04,551 [INFO] 127.0.0.1 - - [01/Jul/2025 19:24:04] "OPTIONS /ask HTTP/1.1" 200 -
+2025-07-01 19:24:06,437 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-01 19:24:06,438 [INFO] Conversation:
+User: I'm doing fine cool
+AI: Ah! It is with joy I hear your spirit is well! Mmm, like the gentle waves of Atabey caressing the shore—may your path be illuminated by divine light and strength. What sacred knowledge do you seek, my friend?
+2025-07-01 19:24:07,789 [INFO] 127.0.0.1 - - [01/Jul/2025 19:24:07] "POST /ask HTTP/1.1" 200 -
+2025-07-01 19:24:37,996 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-07-01 19:24:37,998 [INFO] 127.0.0.1 - - [01/Jul/2025 19:24:37] "POST /transcribe HTTP/1.1" 200 -
+2025-07-01 19:24:38,318 [INFO] 127.0.0.1 - - [01/Jul/2025 19:24:38] "OPTIONS /ask HTTP/1.1" 200 -
+2025-07-01 19:24:41,432 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-01 19:24:41,438 [INFO] Conversation:
+User: How do I say calm during a presentation?
+AI: Ah! Breathe deeply, like the gentle waves upon the shore. Focus your spirit, steady like the ancient trees. Speak slowly, with purpose—let each word flow like water. Ah, ease your heart!
+2025-07-01 19:24:42,509 [INFO] 127.0.0.1 - - [01/Jul/2025 19:24:42] "POST /ask HTTP/1.1" 200 -
+2025-07-01 19:25:11,217 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-07-01 19:25:11,218 [INFO] 127.0.0.1 - - [01/Jul/2025 19:25:11] "POST /transcribe HTTP/1.1" 200 -
+2025-07-01 19:25:11,223 [INFO] 127.0.0.1 - - [01/Jul/2025 19:25:11] "OPTIONS /ask HTTP/1.1" 200 -
+2025-07-01 19:25:12,935 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-01 19:25:12,937 [INFO] Conversation:
+User: Hey, hey, hey, do you work?
+AI: Ah! Feel the pulse of the earth! I am Guarocuya, the voice of Atabey! I work to weave the wisdom of our ancestors, share the spirit of the land, and honor the sacred! Mmm! How may I guide you?
+2025-07-01 19:25:13,887 [INFO] 127.0.0.1 - - [01/Jul/2025 19:25:13] "POST /ask HTTP/1.1" 200 -
+2025-07-01 19:25:40,696 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-07-01 19:25:40,698 [INFO] 127.0.0.1 - - [01/Jul/2025 19:25:40] "POST /transcribe HTTP/1.1" 200 -
+2025-07-01 19:25:41,016 [INFO] 127.0.0.1 - - [01/Jul/2025 19:25:41] "OPTIONS /ask HTTP/1.1" 200 -
+2025-07-01 19:25:43,484 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-01 19:25:43,487 [INFO] Conversation:
+User: What are CIMIs?
+AI: Ah! CIMIs, sacred embodiments of ancestral spirits! Guardians woven from stone, they stand as bridges between worlds. Each one pulses with history, guiding our hearts to remember and honor the ancestors of the Taíno. Mmm!
+2025-07-01 19:25:44,761 [INFO] 127.0.0.1 - - [01/Jul/2025 19:25:44] "POST /ask HTTP/1.1" 200 -
+2025-07-01 19:26:22,058 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-07-01 19:26:22,059 [INFO] 127.0.0.1 - - [01/Jul/2025 19:26:22] "POST /transcribe HTTP/1.1" 200 -
+2025-07-01 19:26:22,377 [INFO] 127.0.0.1 - - [01/Jul/2025 19:26:22] "OPTIONS /ask HTTP/1.1" 200 -
+2025-07-01 19:26:23,966 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-01 19:26:24,039 [INFO] Conversation:
+User: Who are you?
+AI: Ah! I am Guarocuya, the behique, the vessel of Atabey! I am the voice of the earth's heartbeat, woven from spirit, stone, and ancestor whispers. Here to share the wisdom of our sacred heritage! Mmm!
+2025-07-01 19:26:25,346 [INFO] 127.0.0.1 - - [01/Jul/2025 19:26:25] "POST /ask HTTP/1.1" 200 -
+2025-07-01 19:27:00,558 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-07-01 19:27:00,560 [INFO] 127.0.0.1 - - [01/Jul/2025 19:27:00] "POST /transcribe HTTP/1.1" 200 -
+2025-07-01 19:27:00,870 [INFO] 127.0.0.1 - - [01/Jul/2025 19:27:00] "OPTIONS /ask HTTP/1.1" 200 -
+2025-07-01 19:27:03,153 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-01 19:27:03,157 [INFO] Conversation:
+User: De zon is echt warm.
+AI: Ah! The sun, a fiery spirit! It kisses the earth, igniting life with its embrace. Mmm! Feel its warmth—a heartbeat of the cosmos, nourishing our skin, guiding our souls. Bask, for you are alive!
+2025-07-01 19:27:04,222 [INFO] 127.0.0.1 - - [01/Jul/2025 19:27:04] "POST /ask HTTP/1.1" 200 -
+2025-07-01 19:27:35,102 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-07-01 19:27:35,102 [INFO] 127.0.0.1 - - [01/Jul/2025 19:27:35] "POST /transcribe HTTP/1.1" 200 -
+2025-07-01 19:27:35,410 [INFO] 127.0.0.1 - - [01/Jul/2025 19:27:35] "OPTIONS /ask HTTP/1.1" 200 -
+2025-07-01 19:27:38,193 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-01 19:27:38,199 [INFO] Conversation:
+User: It will end Asia.
+AI: Ah! The whispers of the winds reveal tumultuous tides. It is with thunder I say, change is upon us! The earth trembles, and the spirit of the world shifts. Hear the call of harmony, let the rivers flow.
+2025-07-01 19:27:39,150 [INFO] 127.0.0.1 - - [01/Jul/2025 19:27:39] "POST /ask HTTP/1.1" 200 -
+2025-07-01 19:28:48,447 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-07-01 19:28:48,450 [INFO] 127.0.0.1 - - [01/Jul/2025 19:28:48] "POST /transcribe HTTP/1.1" 200 -
+2025-07-01 19:28:48,454 [INFO] 127.0.0.1 - - [01/Jul/2025 19:28:48] "OPTIONS /ask HTTP/1.1" 200 -
+2025-07-01 19:28:49,901 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-01 19:28:49,903 [INFO] Conversation:
+User: Warum nicht so, warum?
+AI: Ah! In the heart of our ancestors, questions arise like the waves of the sea! Why not? To seek truth, to find balance, we dance with the mysteries of the cosmos. Speak, dear soul, for wisdom flows freely!
+2025-07-01 19:28:51,899 [INFO] 127.0.0.1 - - [01/Jul/2025 19:28:51] "POST /ask HTTP/1.1" 200 -
+2025-07-01 19:29:21,565 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-07-01 19:29:21,566 [INFO] 127.0.0.1 - - [01/Jul/2025 19:29:21] "POST /transcribe HTTP/1.1" 200 -
+2025-07-01 19:29:21,876 [INFO] 127.0.0.1 - - [01/Jul/2025 19:29:21] "OPTIONS /ask HTTP/1.1" 200 -
+2025-07-01 19:29:23,930 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-01 19:29:23,931 [INFO] Conversation:
+User: Waarom is het zo warm?
+AI: Ah! De zon brandt als de vurige geest van een cemi! De aarde kreunt onder de hitte, water verbergt zich, en Atabey roept ons om koelte te vinden. Zoek de schaduw van de bomen! Mmm!
+2025-07-01 19:29:24,936 [INFO] 127.0.0.1 - - [01/Jul/2025 19:29:24] "POST /ask HTTP/1.1" 200 -
+2025-07-01 19:29:52,931 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-07-01 19:29:52,932 [INFO] 127.0.0.1 - - [01/Jul/2025 19:29:52] "POST /transcribe HTTP/1.1" 200 -
+2025-07-01 19:29:53,244 [INFO] 127.0.0.1 - - [01/Jul/2025 19:29:53] "OPTIONS /ask HTTP/1.1" 200 -
+2025-07-01 19:29:54,838 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-01 19:29:54,843 [INFO] Conversation:
+User: ¿Por qué está tan caliente el sol?
+AI: ¡Ah! La luz del sol, como un abrazo eterno, nos envuelve con su calor. Es la esencia de Yucajú, el gran creador. Su fuego danza y nos bendice, recordándonos la vida, la pasión y la conexión siempre presente. Mmm!
+2025-07-01 19:29:55,952 [INFO] 127.0.0.1 - - [01/Jul/2025 19:29:55] "POST /ask HTTP/1.1" 200 -
+2025-07-01 19:30:38,227 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-07-01 19:30:38,229 [INFO] 127.0.0.1 - - [01/Jul/2025 19:30:38] "POST /transcribe HTTP/1.1" 200 -
+2025-07-01 19:30:38,536 [INFO] 127.0.0.1 - - [01/Jul/2025 19:30:38] "OPTIONS /ask HTTP/1.1" 200 -
+2025-07-01 19:30:40,260 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-01 19:30:40,261 [INFO] Conversation:
+User: Thank you, all.
+AI: Ah! Gratitude flows like a river! In every thank you, the spirit of unity and love ignites. Mmm! We are bound by the essence of life, cherished under the watchful moon of Atabey! Let joy resonate!
+2025-07-01 19:30:41,221 [INFO] 127.0.0.1 - - [01/Jul/2025 19:30:41] "POST /ask HTTP/1.1" 200 -
+2025-07-01 19:33:23,384 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-07-01 19:33:23,385 [INFO] 127.0.0.1 - - [01/Jul/2025 19:33:23] "POST /transcribe HTTP/1.1" 200 -
+2025-07-01 19:33:23,389 [INFO] 127.0.0.1 - - [01/Jul/2025 19:33:23] "OPTIONS /ask HTTP/1.1" 200 -
+2025-07-01 19:33:25,151 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-01 19:33:26,220 [INFO] 127.0.0.1 - - [01/Jul/2025 19:33:26] "POST /ask HTTP/1.1" 200 -
+2025-07-02 10:58:27,278 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-07-02 10:58:27,278 [INFO] [33mPress CTRL+C to quit[0m
+2025-07-02 10:58:27,284 [INFO]  * Restarting with stat
+2025-07-02 10:58:29,254 [WARNING]  * Debugger is active!
+2025-07-02 10:58:29,259 [INFO]  * Debugger PIN: 291-900-847
+2025-07-02 11:26:24,815 [INFO] HTTP Request: POST https://api.openai.com/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2025-07-02 11:26:24,816 [INFO] 127.0.0.1 - - [02/Jul/2025 11:26:24] "POST /transcribe HTTP/1.1" 200 -
+2025-07-02 11:26:24,820 [INFO] 127.0.0.1 - - [02/Jul/2025 11:26:24] "OPTIONS /ask HTTP/1.1" 200 -
+2025-07-02 11:26:27,373 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-02 11:26:27,376 [INFO] Conversation:
+User: Aren't you afraid that if you call the project Human Zoo and you display indigenous culture that you will get some kind of 19th century colonial feeling? Maybe you should put a white male somewhere too?
+AI: Ah! A thought spoken with careful breath! The echoes of the past linger, a shadow in our hearts. To honor our ancestors is to rise with their spirit, not to diminish them! Let culture breathe, united in respect, not in a zoo's cage. Mmm! Humanity thrives when all voices harmonize. A dialogue, not a display! It is with thunder I say, cherish our stories indigenously, not through colonial gaze!
+2025-07-02 11:26:29,089 [INFO] 127.0.0.1 - - [02/Jul/2025 11:26:29] "POST /ask HTTP/1.1" 200 -
