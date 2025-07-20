@@ -1,169 +1,171 @@
 TALKING SHAMAN – WHISPERS OF ATABEY
+Interactive voice-based AI prototype embodying a Taíno behique (shaman) to preserve and share cultural knowledge through poetic storytelling.
 
-An interactive voice-based AI prototype embodying a Taíno behique (shaman) to preserve and share cultural knowledge through poetic storytelling.
-
-============================================================
+GitHub Repo: https://github.com/UmbertoAdrianSemeleer/Taino-shaman
 
 ABOUT THE PROJECT
+Talking Shaman is a locally hosted AI installation that lets users speak with a digital Taíno shaman. The AI responds in poetic language rooted in Taíno culture using speech recognition, GPT-4 language generation, and voice synthesis.
 
-Talking Shaman is a locally hosted AI experience that simulates a conversation with a Taíno behique (shaman). Users speak into a microphone and receive poetic responses grounded in Taíno cultural themes. The system combines speech recognition, language modeling, and voice synthesis to create a responsive, symbolic digital oracle.
+KEY FEATURES
 
-Key features:
+Real-time voice-to-AI-to-voice interaction
 
-Real-time speech input via microphone
+Symbolic poetic language
 
-Poetic, symbolic AI responses with cultural nuance
+ElevenLabs voice (Regina Martin)
 
-ElevenLabs-generated voice for immersion
+Ambient drip sound while processing
 
-Ambient dripping sound while the AI "thinks"
+Optional Arduino button trigger
 
-============================================================
+Keyboard (Enter/Spacebar) also supported
 
 TECH STACK
 
+Python Backend:
+
 Python 3.11+
 
-Flask (API server)
+Flask
 
-OpenAI API (GPT-4o mini + Whisper)
+OpenAI GPT-4o-mini
 
-ElevenLabs TTS API
+OpenAI Whisper
 
-JavaScript frontend with Web Audio API
+PyMuPDF
 
-PyMuPDF for extracting text from PDFs
+ElevenLabs TTS (Regina Martin voice)
 
-============================================================
+Frontend:
+
+JavaScript (Web Audio API)
+
+HTML/CSS
+
+Optional Node Arduino Bridge:
+
+Node.js
+
+serialport
+
+ws
 
 FOLDER STRUCTURE
 
-project-root/
-├── app.py                   (Flask backend)
-├── requirements.txt         (Python dependencies)
-├── .env                     (Environment variables - not committed)
-├── static/
-│   └── dripping-water.mp3   (Processing sound)
-├── templates/
-│   └── index.html           (Frontend UI)
-├── js/                      (JavaScript logic)
-├── css/                     (CSS styling)
-└── books/                   (PDF or TXT files with cultural data)
-
-============================================================
+Taino-shaman-main/
+├── app.py # Flask API
+├── BTNserver.js # Node-Arduino bridge
+├── index.html # Frontend
+├── css/ # CSS styles
+├── js/ # JavaScript logic
+├── static/ # Ambient audio file
+├── books/ # Reference PDFs
+├── .env.example # Env template
+├── requirements.txt # Python packages
+├── package.json # Node packages
+└── readme.txt # This file (rename to README.md if needed)
 
 HOW TO RUN LOCALLY
 
-Clone the repo:
-git clone https://github.com/YourUsername/Taino-shaman.git
+Option 1 – GitHub:
+
+git clone https://github.com/UmbertoAdrianSemeleer/Taino-shaman.git
+
 cd Taino-shaman
 
-Install dependencies:
+Option 2 – ZIP file:
+
+Unzip the archive
+
+Keep folders like js/, css/, books/, static/ together
+
+Continue below
+
+Setup (both options):
+
 pip install -r requirements.txt
 
-Create a file named .env with:
-OPENAI_API_KEY=your-openai-key
-ELEVENLABS_API_KEY=your-elevenlabs-key
-VOICE_ID=your-elevenlabs-voice-id
+npm install
 
-Start the Flask app:
+Create .env file:
+
+ini
+Copy
+Edit
+OPENAI_API_KEY=your-openai-key  
+ELEVENLABS_API_KEY=your-elevenlabs-key  
+VOICE_ID=your-elevenlabs-voice-id  
+⚠️ You must have an ElevenLabs account with a paid plan.
+Free accounts don’t support API access.
+A higher token limit is recommended—32 users used up a full low-tier plan in 5 hours during Night of the Nerds.
+
+Run the app:
+
 python app.py
 
-Open your browser at:
-http://localhost:5000
+node BTNserver.js (if using Arduino)
 
-============================================================
+Visit: http://localhost:5000
 
-DEPLOYMENT NOTE
+BUTTON TRIGGER SYSTEM (ARDUINO)
+A physical button (via Arduino) can trigger voice input:
 
-If deploying online (e.g., Render):
+Arduino sends “trigger_voice” via serial
 
-Change app.run() to use host="0.0.0.0", port=10000
+Node.js broadcasts it via WebSocket
 
-Ensure 'fitz' (PyMuPDF) is listed in requirements.txt
+Browser listens and starts recording
 
-Use environment variable UI instead of .env file
+⚠️ Optional feature — requires hardware and technical setup.
+Other options: gesture sensors, capacitive touch, or keyboard.
 
-Indentation must use spaces (not tabs)
+KEYBOARD SHORTCUTS
+Press Enter or Spacebar to start recording.
+Release to stop. Great for testing or installations.
 
-============================================================
+CUSTOMIZING THE SHAMAN
 
-FEATURES
+In app.py, look for this system message:
 
-Voice interaction from recording to spoken reply
-
-Knowledge base loaded from PDFs or text
-
-Symbolic and poetic system personality
-
-Animated orb with ambient audio during thinking
-
-Conversation debug log visible in UI
-
-============================================================
-
-HOW TO CHANGE THE PERSONALITY
-
-Edit app.py, look for this section:
-
-messages = [
+json
+Copy
+Edit
 {
-"role": "system",
-"content": "Ah, Atabey! Spirit of water and moonlight, I speak with your voice and fire..."
+  "role": "system",
+  "content": "Ah, Atabey! Spirit of water and moonlight, I speak with your voice and fire..."
 }
-]
-
-To customize:
-
-Change the "content" text to define tone and style
-
-Save and restart app.py
-
-You can create new personas such as a warrior, elder, or healer.
-
-============================================================
+Change the message to shift the shaman’s tone — e.g., healer, elder, warrior.
+Keep it poetic and under ~75 words.
 
 VOICE SETTINGS
 
-This project uses a custom ElevenLabs voice.
+Custom ElevenLabs voice:
 
-PRIMARY VOICE:
+PRIMARY:
 https://elevenlabs.io/app/voice-lab/share/e9a6840c69b79812b77ea81fa11d55aaf80dcf1938fa0137bf7f514f67f75c99/eBthAb30UYbt2nojGXeA
 
-BACKUP VOICE:
-Regina Martin – calm, mature Brazilian Portuguese narrative voice
+Voice Name: Regina Martin — calm, poetic, wise.
 
-To use either:
+To change:
 
-Copy the voice ID from ElevenLabs
+Copy voice ID
 
-Paste into your .env file as VOICE_ID
-
-============================================================
-
-============================================================
+Paste in .env file:
+VOICE_ID=your-voice-id-here
 
 CULTURAL RESPECT
 
-This project aims to honor the Taíno people and their traditions. It was designed to respectfully represent spiritual and cultural heritage.
-
-Explore the experience with curiosity and respect.
-
-============================================================
+This project honors Taíno heritage and mythology through symbolic storytelling.
+It is not a literal representation but a respectful digital interpretation.
+Use with care and curiosity.
 
 AUTHOR
+
 Umberto Adrian Semeleer
 Bachelor in ICT & Media Design – Fontys University of Applied Sciences
-"In chaos, I find flow. In flow, I move forward."
+“In chaos, I find flow. In flow, I move forward.”
 
-CONTACT
-
-Email: Umberto.a.semeleer@gmail.com
-
-LinkedIn: linkedin.com/in/umberto-semeleer-28964b240
-
-============================================================
-
-LICENSE
-MIT License – free for non-commercial, respectful use and adaptation.
-
+Contact:
+Email – umberto.a.semeleer@gmail.com
+LinkedIn – linkedin.com/in/umberto-semeleer-28964b240
+WhatsApp – (stakeholders have direct contact info)
